@@ -1,0 +1,15 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10" cy="10" r="10" fill="#39BBE4"/>
+<circle cx="10" cy="7" r="3" fill="url(#task-type-0)"/>
+<path d="M5 11H15V12.3468C15 14.3644 13.3644 16 11.3468 16H8.65322C6.6356 16 5 14.3644 5 12.3468V11Z" fill="url(#task-type-1)"/>
+<defs>
+<linearGradient id="task-type-0" x1="11.5685" y1="9.74835" x2="7.14026" y2="7.34564" gradientUnits="userSpaceOnUse">
+<stop offset="0.0118159" stop-color="white" stop-opacity="0.7"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+<linearGradient id="task-type-1" x1="11" y1="16" x2="8.47272" y2="10.0115" gradientUnits="userSpaceOnUse">
+<stop offset="0.0118159" stop-color="white" stop-opacity="0.53"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

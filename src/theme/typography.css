@@ -1,0 +1,231 @@
+/* Typography classes — apply directly to elements */
+
+/* ─── Header ─── */
+.header-h1 {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 50px;
+  letter-spacing: -0.0045em;
+}
+
+.header-h2 {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.0047em;
+}
+
+.header-h3 {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.header-h4 {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/* ─── Title ─── */
+.title-x-large {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.title-large {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.title-medium {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.title-small {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.0107em;
+}
+
+/* ─── Body ─── */
+.body-4x-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 44px;
+  letter-spacing: -0.0034em;
+}
+
+.body-3x-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.0047em;
+}
+
+.body-2x-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.body-2x-large-spacious {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.body-x-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.body-x-large-spacious {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.body-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.body-large-spacious {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.body-large-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.body-medium {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.0107em;
+}
+
+.body-medium-spacious {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.0107em;
+}
+
+.body-medium-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.0107em;
+}
+
+.body-small {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.0167em;
+}
+
+.body-small-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.0167em;
+}
+
+.body-x-small {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+}
+
+.body-x-small-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Reduced Body ─── */
+.reduced-body-large {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.reduced-body-large-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.reduced-body-medium {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.0115em;
+}
+
+.reduced-body-medium-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.0115em;
+}
+
+.reduced-body-small {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.0182em;
+}
+
+.reduced-body-small-strong {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.0182em;
+}

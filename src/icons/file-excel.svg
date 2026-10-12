@@ -1,0 +1,11 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 5C0 2.23858 2.23858 0 5 0H15C17.7614 0 20 2.23858 20 5V15C20 17.7614 17.7614 20 15 20H5C2.23858 20 0 17.7614 0 15V5Z" fill="url(#file-excel-0)"/>
+<path d="M8.00342 14.5244L10.0728 11.3062L12.1357 14.5244H14.4019L11.2217 9.73828L14.1162 5.21875H11.939L10.1108 8.2085L8.24463 5.21875H6.04834L8.93018 9.66846L5.75 14.5244H8.00342Z" fill="white"/>
+<defs>
+<linearGradient id="file-excel-0" x1="0.416666" y1="1.94543e-07" x2="20" y2="20.4167" gradientUnits="userSpaceOnUse">
+<stop stop-color="#29B97F"/>
+<stop offset="0.5" stop-color="#21A366"/>
+<stop offset="1" stop-color="#117634"/>
+</linearGradient>
+</defs>
+</svg>

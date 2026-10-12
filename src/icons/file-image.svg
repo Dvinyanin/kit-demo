@@ -1,0 +1,13 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 5C0 2.23858 2.23858 0 5 0H15C17.7614 0 20 2.23858 20 5V15C20 17.7614 17.7614 20 15 20H5C2.23858 20 0 17.7614 0 15V5Z" fill="url(#file-image-0)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.98184 15C3.19264 15 2.72705 14.097 3.17415 13.4335L6.70169 8.19861C7.09115 7.62064 7.9276 7.62065 8.31706 8.19861L12.9002 15H3.98184Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.50841 15L12.6135 10.2481C13.0015 9.65434 13.8566 9.65434 14.2446 10.2481L16.3337 13.4453C16.768 14.1099 16.301 15 15.5182 15H9.50841Z" fill="white"/>
+<path d="M15.8407 5.5C15.8407 6.32843 15.1824 7 14.3704 7C13.5585 7 12.9002 6.32843 12.9002 5.5C12.9002 4.67157 13.5585 4 14.3704 4C15.1824 4 15.8407 4.67157 15.8407 5.5Z" fill="white"/>
+<defs>
+<linearGradient id="file-image-0" x1="0" y1="0" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFB227"/>
+<stop offset="0.5" stop-color="#FF991F"/>
+<stop offset="1" stop-color="#FF6710"/>
+</linearGradient>
+</defs>
+</svg>

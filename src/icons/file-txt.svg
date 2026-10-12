@@ -1,0 +1,18 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#file-txt-1)">
+<path d="M0 5C0 2.23858 2.23858 0 5 0H15C17.7614 0 20 2.23858 20 5V15C20 17.7614 17.7614 20 15 20H5C2.23858 20 0 17.7614 0 15V5Z" fill="url(#file-txt-0)"/>
+<path d="M12.7877 6.55398L17.3266 6.55409V7.81056H16.1314V13.4348L14.2872 13.4347V7.81045H12.7877V6.55398Z" fill="white"/>
+<path d="M7.49178 6.55259H9.41113L9.79203 7.62234C9.95603 8.11313 10.0693 8.37902 10.1424 8.5577H10.1783C10.2954 8.27406 10.4072 7.9987 10.5541 7.50648L10.8723 6.55259H12.677L11.0968 9.89731L12.8092 13.4503H10.9532L10.5083 12.1093C10.3766 11.7839 10.3059 11.5973 10.1855 11.3029H10.1496C10.076 11.5334 9.9677 11.6274 9.81049 12.1093L9.26645 13.4503H7.45153L8.37578 11.6624L9.32556 9.89731L7.49178 6.55259Z" fill="white"/>
+<path d="M2.67334 6.5498H7.56181V7.82602H6.15049V13.4503H4.33031V7.82602H2.67334V6.5498Z" fill="white"/>
+</g>
+<defs>
+<linearGradient id="file-txt-0" x1="0" y1="0" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#B8C9F8"/>
+<stop offset="0.5" stop-color="#8DA9FB"/>
+<stop offset="1" stop-color="#557FF9"/>
+</linearGradient>
+<clipPath id="file-txt-1">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>

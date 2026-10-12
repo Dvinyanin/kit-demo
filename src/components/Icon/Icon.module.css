@@ -1,0 +1,6 @@
+.icon :global(svg) {
+  display: block;
+  width: var(--icon-size, 100%);
+  height: var(--icon-size, 100%);
+  fill: var(--icon-color, currentColor);
+}

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 5C0 2.23858 2.23858 0 5 0H15C17.7614 0 20 2.23858 20 5V15C20 17.7614 17.7614 20 15 20H5C2.23858 20 0 17.7614 0 15V5Z" fill="url(#file-word-0)"/>
+<path d="M8.05371 14.9946L9.90088 8.0376L11.7544 14.9946H13.7476L16.0073 5.68896H14.1157L12.6875 12.189L11.0562 5.68896H8.82178L7.12061 12.0811L5.71777 5.68896H3.79443L6.01611 14.9946H8.05371Z" fill="white"/>
+<defs>
+<linearGradient id="file-word-0" x1="0.416666" y1="5.59311e-07" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#379ADE"/>
+<stop offset="0.5" stop-color="#2C7CD2"/>
+<stop offset="1" stop-color="#163FBD"/>
+</linearGradient>
+</defs>
+</svg>

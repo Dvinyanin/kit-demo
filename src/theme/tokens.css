@@ -1,0 +1,384 @@
+/* Semantic tokens — reference these in component styles */
+@import "./colors.css";
+
+:root {
+  /* ─── Backgrounds ─── */
+
+  /* Page */
+  --bg-page-primary: var(--neutral-20);
+  --bg-page-secondary: var(--white-100);
+
+  /* Surface */
+  --bg-surface: var(--white-100);
+  --bg-surface-hover: var(--neutral-30-a50);
+  --bg-surface-active: var(--neutral-50-a50);
+  --bg-surface-disabled: var(--neutral-20);
+  --bg-surface-on-page: var(--neutral-30);
+  --bg-surface-black: var(--black-100);
+  --bg-surface-slate: var(--neutral-500);
+  --bg-surface-graphite: var(--neutral-300);
+  --bg-surface-transparent: transparent;
+
+  /* Surface level 2 */
+  --bg-surface-level2: var(--white-100);
+  --bg-surface-level2-hover: var(--neutral-20);
+  --bg-surface-level2-active: var(--neutral-40);
+
+  /* Surface high / highest */
+  --bg-surface-high: var(--neutral-20-adapt);
+  --bg-surface-high-hover: var(--neutral-40-adapt);
+  --bg-surface-high-active: var(--neutral-50-adapt);
+  --bg-surface-highest: var(--neutral-40-adapt);
+  --bg-surface-highest-hover: var(--neutral-60-a50);
+  --bg-surface-highest-active: var(--neutral-80-a50);
+
+  /* Table */
+  --bg-table: var(--white-100);
+  --bg-table-hover: var(--blue-25);
+  --bg-table-active: var(--blue-200-a15);
+  --bg-table-selected: var(--green-50);
+
+  /* Highlight / Favorite / Comment */
+  --bg-highlight: var(--green-50);
+  --bg-highlight-on-text: var(--green-200-a70);
+  --bg-favorite: var(--yellow-500);
+  --bg-comment: var(--blue-50);
+
+  /* Brand */
+  --bg-brand: var(--brand);
+  --bg-brand-alt: var(--brand-a40);
+  --bg-brand-gray: var(--brand-gray);
+
+  /* Neutral fills */
+  --bg-muted: var(--neutral-40-adapt);
+  --bg-muted-hover: var(--neutral-50-adapt);
+  --bg-muted-active: var(--neutral-60-adapt);
+  --bg-muted-disabled: var(--neutral-40-adapt);
+  --bg-silver: var(--neutral-80);
+  --bg-silver-hover: var(--neutral-300);
+  --bg-silver-active: var(--neutral-500);
+  --bg-silver-disabled: var(--neutral-40);
+  --bg-semisilver: var(--neutral-40-adapt);
+  --bg-semisilver-hover: var(--neutral-300);
+  --bg-semisilver-active: var(--neutral-500);
+  --bg-semisilver-disabled: var(--neutral-30-a50);
+  --bg-ghost: var(--bg-surface-transparent);
+  --bg-ghost-hover: var(--neutral-40-adapt);
+  --bg-ghost-active: var(--neutral-50-adapt);
+  --bg-ghost-disabled: var(--bg-surface-transparent);
+  --bg-white: var(--white-100);
+  --bg-white-hover: var(--white-a70);
+  --bg-white-active: var(--white-a60);
+  --bg-white-disabled: var(--white-a15);
+  --bg-white-muted: var(--bg-surface-transparent);
+  --bg-white-muted-alt: var(--white-a10);
+  --bg-white-muted-active: var(--white-a15);
+  --bg-control: var(--neutral-60-adapt);
+  --bg-control-active: var(--neutral-80);
+  --bg-control-disabled: var(--neutral-50-adapt);
+  --bg-on-control: var(--neutral-80-adapt);
+  --bg-segment: var(--white-100);
+  --bg-hint-silver: var(--neutral-300);
+
+  /* Accent (green) */
+  --bg-accent: var(--green-600);
+  --bg-accent-hover: var(--green-800);
+  --bg-accent-active: var(--green-900);
+  --bg-accent-disabled: var(--green-200);
+  --bg-accent-muted: var(--green-50-adapt);
+  --bg-accent-muted-hover: var(--green-200-a50);
+  --bg-accent-muted-active: var(--green-500-a50);
+  --bg-accent-muted-disabled: var(--green-50-adapt);
+
+  /* Danger (red) */
+  --bg-danger: var(--red-600);
+  --bg-danger-hover: var(--red-800);
+  --bg-danger-active: var(--red-900);
+  --bg-danger-disabled: var(--red-200);
+  --bg-danger-muted: var(--red-50-adapt);
+  --bg-danger-muted-hover: var(--red-200-a50);
+  --bg-danger-muted-active: var(--red-500-a50);
+  --bg-danger-muted-disabled: var(--red-50-adapt);
+
+  /* Warning (orange) */
+  --bg-warning: var(--orange-600);
+  --bg-warning-hover: var(--orange-800);
+  --bg-warning-active: var(--orange-900);
+  --bg-warning-disabled: var(--orange-200);
+  --bg-warning-muted: var(--orange-50-adapt);
+  --bg-warning-muted-hover: var(--orange-200-a50);
+  --bg-warning-muted-active: var(--orange-500-a50);
+  --bg-warning-muted-disabled: var(--orange-50-adapt);
+
+  /* Info (blue) */
+  --bg-info: var(--blue-600);
+  --bg-info-hover: var(--blue-800);
+  --bg-info-active: var(--blue-900);
+  --bg-info-disabled: var(--blue-200);
+  --bg-info-muted: var(--blue-50-adapt);
+  --bg-info-muted-hover: var(--blue-200-a50);
+  --bg-info-muted-active: var(--blue-500-a50);
+  --bg-info-muted-disabled: var(--blue-50-adapt);
+
+  /* Activity (teal) */
+  --bg-activity: var(--teal-600);
+  --bg-activity-hover: var(--teal-800);
+  --bg-activity-active: var(--teal-900);
+  --bg-activity-disabled: var(--teal-200);
+  --bg-activity-muted: var(--teal-50-adapt);
+  --bg-activity-muted-hover: var(--teal-200-a50);
+  --bg-activity-muted-active: var(--teal-500-a50);
+  --bg-activity-muted-disabled: var(--teal-50-adapt);
+
+  /* Special (violet) */
+  --bg-special: var(--violet-600);
+  --bg-special-hover: var(--violet-800);
+  --bg-special-active: var(--violet-900);
+  --bg-special-disabled: var(--violet-200);
+  --bg-special-muted: var(--violet-50);
+  --bg-special-muted-hover: var(--violet-200-a40);
+  --bg-special-muted-active: var(--violet-500-a50);
+  --bg-special-muted-disabled: var(--violet-50);
+
+  /* Filter tag */
+  --bg-filter-tag: var(--blue-200-a25);
+  --bg-filter-tag-hover: var(--blue-200-a40);
+  --bg-filter-tag-active: var(--blue-200-a50);
+  --bg-filter-tag-disabled: var(--neutral-40-adapt);
+
+  /* Overlay */
+  --bg-overlay-black-medium: var(--black-a32);
+  --bg-overlay-black-subtle: var(--black-a10);
+  --bg-overlay-on-page: var(--neutral-60-a60);
+  --bg-overlay-on-page-alt: var(--black-a15);
+
+  /* Status messages */
+  --bg-status-message-error: var(--red-50);
+  --bg-status-message-info: var(--blue-50);
+  --bg-status-message-success: var(--green-50);
+  --bg-status-message-warning: var(--orange-50);
+
+  /* ─── Borders ─── */
+
+  /* Neutral */
+  --border: var(--neutral-60);
+  --border-soft: var(--neutral-50);
+  --border-active: var(--neutral-80);
+  --border-alt: var(--neutral-60-a50);
+  --border-silver: var(--neutral-80);
+  --border-silver-alt: var(--neutral-80-a50);
+  --border-silver-disabled: var(--neutral-50);
+  --border-on-page: var(--bg-page-primary);
+  --border-on-surface: var(--bg-surface);
+  --border-white-soft: var(--white-a60);
+  --border-white-soft-active: var(--white-100);
+
+  /* Accent (green) */
+  --border-accent: var(--green-600);
+  --border-accent-hover: var(--green-800);
+  --border-accent-active: var(--green-900);
+  --border-accent-alt: var(--green-600-a50);
+
+  /* Danger (red) */
+  --border-danger: var(--red-600);
+  --border-danger-hover: var(--red-800);
+  --border-danger-active: var(--red-900);
+  --border-danger-alt: var(--red-600-a50);
+
+  /* Warning (orange) */
+  --border-warning: var(--orange-600);
+  --border-warning-hover: var(--orange-800);
+  --border-warning-active: var(--orange-900);
+  --border-warning-alt: var(--orange-600-a50);
+
+  /* Activity (teal) */
+  --border-activity: var(--teal-600);
+  --border-activity-hover: var(--teal-800);
+  --border-activity-active: var(--teal-900);
+  --border-activity-alt: var(--teal-600-a50);
+
+  /* Special (violet) */
+  --border-special: var(--violet-600);
+  --border-special-hover: var(--violet-800);
+  --border-special-active: var(--violet-900);
+  --border-special-alt: var(--violet-600-a50);
+
+  /* ─── Text & Icon ─── */
+
+  /* Neutral */
+  --texticon: var(--neutral-920);
+  --texticon-black: var(--neutral-920);
+  --texticon-black-disabled: var(--black-a32);
+  --texticon-active: var(--neutral-900);
+  --texticon-medium-high: var(--neutral-500);
+  --texticon-medium-high-hover: var(--neutral-900);
+  --texticon-medium: var(--neutral-300);
+  --texticon-medium-hover: var(--neutral-500);
+  --texticon-secondary: var(--neutral-100);
+  --texticon-secondary-hover: var(--neutral-300);
+  --texticon-tertiary: var(--neutral-80-adapt);
+  --texticon-tertiary-hover: var(--neutral-100);
+  --texticon-quaternary: var(--neutral-60-adapt);
+  --texticon-quaternary-hover: var(--neutral-80-adapt);
+  --texticon-graphite: var(--neutral-300);
+  --texticon-disabled: var(--neutral-80);
+  --texticon-disabled-alt: var(--neutral-80-a50);
+  --texticon-on-color: var(--white-100);
+  --texticon-on-color-disabled: var(--white-a70);
+  --texticon-white: var(--white-100);
+  --texticon-white-disabled: var(--white-a60);
+  --texticon-favorite: var(--yellow-500);
+
+  /* Accent (green) */
+  --texticon-accent: var(--green-600);
+  --texticon-accent-alt: var(--green-800);
+  --texticon-accent-hover: var(--green-800);
+  --texticon-accent-active: var(--green-900);
+  --texticon-accent-disabled: var(--green-200);
+  --texticon-accent-tab: var(--green-850);
+
+  /* Danger (red) */
+  --texticon-danger: var(--red-600);
+  --texticon-danger-hover: var(--red-800);
+  --texticon-danger-active: var(--red-900);
+  --texticon-danger-disabled: var(--red-200);
+
+  /* Warning (orange) */
+  --texticon-warning: var(--orange-600);
+  --texticon-warning-hover: var(--orange-800);
+  --texticon-warning-active: var(--orange-900);
+  --texticon-warning-disabled: var(--orange-200);
+
+  /* Info (blue) */
+  --texticon-info: var(--blue-600);
+  --texticon-info-hover: var(--blue-800);
+  --texticon-info-active: var(--blue-900);
+  --texticon-info-disabled: var(--blue-200);
+
+  /* Activity (teal) */
+  --texticon-activity: var(--teal-600);
+  --texticon-activity-hover: var(--teal-800);
+  --texticon-activity-active: var(--teal-900);
+  --texticon-activity-disabled: var(--teal-200);
+
+  /* Special (violet) */
+  --texticon-special: var(--violet-600);
+  --texticon-special-hover: var(--violet-800);
+  --texticon-special-active: var(--violet-900);
+  --texticon-special-disabled: var(--violet-200);
+
+  /* ─── Icon (standalone) ─── */
+  --icon-black: var(--neutral-900);
+  --icon-black-disabled: var(--black-a32);
+  --icon-active: var(--neutral-900);
+  --icon-secondary: var(--neutral-300);
+  --icon-secondary-hover: var(--neutral-500);
+  --icon-tertiary-thin: var(--neutral-100);
+  --icon-tertiary-hover: var(--neutral-300);
+  --icon-quaternary: var(--neutral-60-adapt);
+  --icon-disabled: var(--neutral-80);
+  --icon-disabled-alt: var(--neutral-80-a50);
+  --icon-on-accent: var(--white-100);
+  --icon-white: var(--white-100);
+  --icon-white-disabled: var(--white-a60);
+  --icon-white-muted: var(--white-a25);
+
+  /* Icon accent (green) */
+  --icon-accent: var(--green-600);
+  --icon-accent-alt: var(--green-800);
+  --icon-accent-hover: var(--green-800);
+  --icon-accent-active: var(--green-900);
+  --icon-accent-disabled: var(--green-200);
+
+  /* Icon danger (red) */
+  --icon-danger: var(--red-600);
+  --icon-danger-hover: var(--red-800);
+  --icon-danger-active: var(--red-900);
+  --icon-danger-disabled: var(--red-200);
+
+  /* Icon warning (orange) */
+  --icon-warning: var(--orange-600);
+  --icon-warning-hover: var(--orange-800);
+  --icon-warning-active: var(--orange-900);
+  --icon-warning-disabled: var(--orange-200);
+
+  /* Icon info (blue) */
+  --icon-info: var(--blue-600);
+  --icon-info-hover: var(--blue-800);
+  --icon-info-active: var(--blue-900);
+  --icon-info-disabled: var(--blue-200);
+
+  /* Icon activity (teal) */
+  --icon-activity: var(--teal-600);
+  --icon-activity-hover: var(--teal-800);
+  --icon-activity-active: var(--teal-900);
+  --icon-activity-disabled: var(--teal-200);
+
+  /* Icon special (violet) */
+  --icon-special: var(--violet-600);
+  --icon-special-hover: var(--violet-800);
+  --icon-special-active: var(--violet-900);
+  --icon-special-disabled: var(--violet-200);
+
+  /* ─── Tags ─── */
+  --tag-container-blue: var(--blue-200-a40);
+  --tag-container-green: var(--green-200-a50);
+  --tag-container-orange: var(--orange-200-a50);
+  --tag-container-red: var(--red-200-a25);
+  --tag-container-silver: var(--neutral-80-a25);
+  --tag-container-teal: var(--teal-200-a40);
+  --tag-container-violet: var(--violet-200-a40);
+
+  --tag-on-container-blue: var(--blue-700);
+  --tag-on-container-green: var(--green-850);
+  --tag-on-container-orange: var(--orange-deep-700);
+  --tag-on-container-red: var(--red-600);
+  --tag-on-container-silver: var(--neutral-100);
+  --tag-on-container-teal: var(--teal-700);
+  --tag-on-container-violet: var(--violet-700);
+
+  /* ─── Effects ─── */
+  --effects-focus-ring: var(--green-700);
+
+  /* Shadow color atoms */
+  --effects-shadows-shadow-0_1: var(--neutral-900-a12);
+  --effects-shadows-shadow-50_1: var(--neutral-900-a10);
+  --effects-shadows-shadow-100_1: var(--neutral-900-a13);
+  --effects-shadows-shadow-300_1: var(--neutral-900-a13);
+  --effects-shadows-shadow-500_1: var(--neutral-900-a16);
+  --effects-shadows-shadow-on-white-100_1: var(--neutral-900-a15);
+  --effects-shadows-shadow-on-white-100_2: var(--neutral-900-a13);
+  --effects-shadows-shadow-on-white-300_1: var(--neutral-900-a15);
+  --effects-shadows-shadow-on-white-300_2: var(--neutral-900-a13);
+  --effects-shadows-shadow-on-white-500_1: var(--neutral-900-a16);
+  --effects-shadows-shadow-on-white-500_2: var(--neutral-900-a26);
+  --effects-shadows-shadow-popover-500_1: var(--neutral-900-a40);
+  --effects-shadows-shadow-popover-500_2: var(--neutral-900-a06);
+  --effects-shadows-shadow-popover-500_3: var(--neutral-900-a30);
+
+  /* Shadows */
+  --shadow-0: 0px 0px 0px 1px var(--effects-shadows-shadow-0_1);
+  --shadow-50: 0px 1px 2px 0px var(--effects-shadows-shadow-50_1);
+  --shadow-100: 0px 2px 10px -2px var(--effects-shadows-shadow-100_1);
+  --shadow-on-white-100:
+    0px 2px 10px -2px var(--effects-shadows-shadow-on-white-100_2),
+    0px 0px 1px 0px var(--effects-shadows-shadow-on-white-100_1);
+  --shadow-300: 0px 4px 16px -4px var(--effects-shadows-shadow-300_1);
+  --shadow-on-white-300:
+    0px 4px 16px -4px var(--effects-shadows-shadow-on-white-300_2),
+    0px 0px 1px 0px var(--effects-shadows-shadow-on-white-300_1);
+  --shadow-500: 0px 8px 32px -8px var(--effects-shadows-shadow-500_1);
+  --shadow-on-white-500:
+    0px 8px 32px -8px var(--effects-shadows-shadow-on-white-500_2),
+    0px 0px 1px 0px var(--effects-shadows-shadow-on-white-500_1);
+  --shadow-popover-500:
+    0px 8px 32px -8px var(--effects-shadows-shadow-popover-500_3),
+    0px -2px 6px 0px var(--effects-shadows-shadow-popover-500_2),
+    0px 0px 1px 0px var(--effects-shadows-shadow-popover-500_1);
+
+  /* ─── Loader / Skeleton ─── */
+  --loader-neutral: var(--neutral-100);
+  --skeleton-on-page: var(--neutral-50-a50);
+  --skeleton-on-slate: var(--neutral-80-a50);
+  --skeleton-on-surface: var(--neutral-30);
+}
