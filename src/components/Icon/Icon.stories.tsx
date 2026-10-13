@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { figmaUrl } from "../../../.storybook/figma";
 import { icons } from "../../icons";
 import { Icon } from "./Icon";
 import type { IconName } from "./IconProvider";
@@ -7,19 +8,48 @@ import type { IconName } from "./IconProvider";
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
   component: Icon,
-  args: {
-    type: "check",
-  },
   argTypes: {
-    type: { control: "select", options: Object.keys(icons) },
+    type: { control: false },
+  },
+  parameters: {
+    design: {
+      type: "figma",
+      url: figmaUrl("webComponents", "37-621"),
+    },
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {
-  render: ({ type }) => <Icon type={type} />,
+export const All: Story = {
+  name: "All icons",
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+      {(Object.keys(icons) as IconName[]).map((name) => (
+        <div
+          key={name}
+          title={name}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 4,
+            width: 64,
+          }}
+        >
+          <div style={{ "--icon-size": "32px" } as React.CSSProperties}>
+            <Icon type={name} />
+          </div>
+          <span
+            style={{ fontSize: 10, color: "#888", textAlign: "center", wordBreak: "break-all" }}
+          >
+            {name}
+          </span>
+        </div>
+      ))}
+    </div>
+  ),
 };
 
 interface GradientArgs {
@@ -37,10 +67,26 @@ export const GradientCustomize: StoryObj<GradientArgs> = {
     externalGradient: false,
   },
   argTypes: {
-    externalGradient: { control: "boolean", name: "External gradient", description: "123" },
-    iconColor: { control: "color", name: "--icon-color" },
-    colorStart: { control: "color", name: "--icon-color-start" },
-    colorEnd: { control: "color", name: "--icon-color-end" },
+    type: {
+      control: "select",
+      options: Object.keys(icons).filter((icon) => icon.includes("accent")),
+    },
+    externalGradient: { control: "boolean", name: "External gradient" },
+    iconColor: {
+      control: "color",
+      name: "--icon-color",
+      if: { arg: "externalGradient", truthy: false },
+    },
+    colorStart: {
+      control: "color",
+      name: "--icon-color-start",
+      if: { arg: "externalGradient", truthy: false },
+    },
+    colorEnd: {
+      control: "color",
+      name: "--icon-color-end",
+      if: { arg: "externalGradient", truthy: false },
+    },
   },
   render: ({ type, externalGradient, iconColor, colorStart, colorEnd }) => {
     const fill = externalGradient ? "url(#external-gradient)" : iconColor || undefined;
