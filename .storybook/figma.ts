@@ -5,5 +5,6 @@ const FIGMA_FILES = {
 } as const;
 
 export function figmaUrl(file: keyof typeof FIGMA_FILES, nodeId: string) {
-  return `https://www.figma.com/design/${FIGMA_FILES[file]}?node-id=${nodeId}`;
+  const fileUrl = `https://www.figma.com/design/${FIGMA_FILES[file]}?node-id=${nodeId}`;
+  return `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(fileUrl)}`;
 }
