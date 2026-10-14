@@ -18,8 +18,8 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"],
-      "@storybook/*": ["./.storybook/*"]
+      "@/storybook/*": ["./.storybook/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", ".storybook", "tests", "scripts"]

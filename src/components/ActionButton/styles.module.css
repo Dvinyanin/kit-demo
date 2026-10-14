@@ -1,0 +1,391 @@
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid var(--action-button-border, transparent);
+  cursor: pointer;
+  white-space: nowrap;
+  outline: 0;
+  user-select: none;
+  text-decoration: none;
+  margin: 0;
+  background-color: var(--action-button-bg);
+  color: var(--action-button-color);
+  transition:
+    background-color 100ms,
+    border-color 100ms,
+    color 100ms;
+
+  &:focus-visible {
+    outline: 2px solid var(--effects-focus-ring);
+    outline-offset: 1px;
+  }
+
+  @media (hover: hover) {
+    &:hover:not([data-disabled]) {
+      background-color: var(--action-button-bg-hover);
+      color: var(--action-button-color-hover);
+      border-color: var(--action-button-border-hover, transparent);
+    }
+  }
+
+  &[data-active]:not([data-disabled]) {
+    background-color: var(--action-button-bg-active);
+    color: var(--action-button-color-active);
+    border-color: var(--action-button-border-active, transparent);
+  }
+
+  &[data-disabled] {
+    background-color: var(--action-button-bg-disabled);
+    color: var(--action-button-color-disabled);
+    border-color: var(--action-button-border-disabled, transparent);
+    cursor: not-allowed;
+  }
+}
+
+/* ─── Size variants ─── */
+
+.xlarge {
+  composes: body-large from global;
+  height: 56px;
+  padding: 0 18px;
+  gap: 2px;
+  border-radius: 8px;
+  --icon-size: 20px;
+}
+
+.large {
+  composes: body-large from global;
+  height: 48px;
+  padding: 0 14px;
+  gap: 2px;
+  border-radius: 8px;
+  --icon-size: 20px;
+}
+
+.medium {
+  composes: body-medium from global;
+  height: 40px;
+  padding: 0 10px;
+  gap: 2px;
+  border-radius: 8px;
+  --icon-size: 16px;
+}
+
+.small {
+  composes: body-medium from global;
+  height: 30px;
+  padding: 0 6px;
+  gap: 2px;
+  border-radius: 6px;
+  --icon-size: 16px;
+}
+
+.xsmall {
+  composes: body-small from global;
+  height: 28px;
+  padding: 0 4px;
+  gap: 2px;
+  border-radius: 6px;
+  --icon-size: 16px;
+}
+
+/* ─── Accent ─── */
+
+.accent {
+  &.filled {
+    --action-button-bg: var(--bg-accent);
+    --action-button-bg-hover: var(--bg-accent-hover);
+    --action-button-bg-active: var(--bg-accent-active);
+    --action-button-bg-disabled: var(--bg-accent-disabled);
+    --action-button-color: var(--texticon-on-color);
+    --action-button-color-hover: var(--texticon-on-color);
+    --action-button-color-active: var(--texticon-on-color);
+    --action-button-color-disabled: var(--texticon-on-color-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-accent-muted-hover);
+    --action-button-bg-active: var(--bg-accent-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-accent);
+    --action-button-color-hover: var(--texticon-accent-hover);
+    --action-button-color-active: var(--texticon-accent-active);
+    --action-button-color-disabled: var(--texticon-accent-disabled);
+    --action-button-border: var(--border-accent);
+    --action-button-border-hover: var(--border-accent-hover);
+    --action-button-border-active: var(--border-accent-active);
+    --action-button-border-disabled: var(--border-accent-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-accent-muted-hover);
+    --action-button-bg-active: var(--bg-accent-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-accent);
+    --action-button-color-hover: var(--texticon-accent-hover);
+    --action-button-color-active: var(--texticon-accent-active);
+    --action-button-color-disabled: var(--texticon-accent-disabled);
+  }
+}
+
+/* ─── Neutral ─── */
+
+.neutral {
+  &.filled {
+    --action-button-bg: var(--bg-muted);
+    --action-button-bg-hover: var(--bg-muted-hover);
+    --action-button-bg-active: var(--bg-muted-active);
+    --action-button-bg-disabled: var(--bg-muted-disabled);
+    --action-button-color: var(--texticon);
+    --action-button-color-hover: var(--texticon-active);
+    --action-button-color-active: var(--texticon-active);
+    --action-button-color-disabled: var(--texticon-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-ghost-hover);
+    --action-button-bg-active: var(--bg-ghost-active);
+    --action-button-bg-disabled: var(--bg-muted-disabled);
+    --action-button-color: var(--texticon-medium);
+    --action-button-color-hover: var(--texticon-medium-hover);
+    --action-button-color-active: var(--texticon-active);
+    --action-button-color-disabled: var(--texticon-disabled);
+    --action-button-border: var(--border);
+    --action-button-border-hover: var(--border-active);
+    --action-button-border-active: var(--border-active);
+    --action-button-border-disabled: var(--border-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-ghost-hover);
+    --action-button-bg-active: var(--bg-ghost-active);
+    --action-button-bg-disabled: var(--bg-muted-disabled);
+    --action-button-color: var(--texticon-medium);
+    --action-button-color-hover: var(--texticon-medium-hover);
+    --action-button-color-active: var(--texticon-active);
+    --action-button-color-disabled: var(--texticon-disabled);
+  }
+}
+
+/* ─── Warning ─── */
+
+.warning {
+  &.filled {
+    --action-button-bg: var(--bg-warning);
+    --action-button-bg-hover: var(--bg-warning-hover);
+    --action-button-bg-active: var(--bg-warning-active);
+    --action-button-bg-disabled: var(--bg-warning-disabled);
+    --action-button-color: var(--texticon-on-color);
+    --action-button-color-hover: var(--texticon-on-color);
+    --action-button-color-active: var(--texticon-on-color);
+    --action-button-color-disabled: var(--texticon-on-color-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-warning-muted-hover);
+    --action-button-bg-active: var(--bg-warning-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-warning);
+    --action-button-color-hover: var(--texticon-warning-hover);
+    --action-button-color-active: var(--texticon-warning-active);
+    --action-button-color-disabled: var(--texticon-warning-disabled);
+    --action-button-border: var(--border-warning);
+    --action-button-border-hover: var(--border-warning);
+    --action-button-border-active: var(--border-warning-active);
+    --action-button-border-disabled: var(--border-warning-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-warning-muted-hover);
+    --action-button-bg-active: var(--bg-warning-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-warning);
+    --action-button-color-hover: var(--texticon-warning-hover);
+    --action-button-color-active: var(--texticon-warning-active);
+    --action-button-color-disabled: var(--texticon-warning-disabled);
+  }
+}
+
+/* ─── Danger ─── */
+
+.danger {
+  &.filled {
+    --action-button-bg: var(--bg-danger);
+    --action-button-bg-hover: var(--bg-danger-hover);
+    --action-button-bg-active: var(--bg-danger-active);
+    --action-button-bg-disabled: var(--bg-danger-disabled);
+    --action-button-color: var(--texticon-on-color);
+    --action-button-color-hover: var(--texticon-on-color);
+    --action-button-color-active: var(--texticon-on-color);
+    --action-button-color-disabled: var(--texticon-on-color-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-danger-muted-hover);
+    --action-button-bg-active: var(--bg-danger-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-danger);
+    --action-button-color-hover: var(--texticon-danger-hover);
+    --action-button-color-active: var(--texticon-danger-active);
+    --action-button-color-disabled: var(--texticon-danger-disabled);
+    --action-button-border: var(--border-danger);
+    --action-button-border-hover: var(--border-danger);
+    --action-button-border-active: var(--border-danger-active);
+    --action-button-border-disabled: var(--border-danger-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-danger-muted-hover);
+    --action-button-bg-active: var(--bg-danger-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-danger);
+    --action-button-color-hover: var(--texticon-danger-hover);
+    --action-button-color-active: var(--texticon-danger-active);
+    --action-button-color-disabled: var(--texticon-danger-disabled);
+  }
+}
+
+/* ─── Activity ─── */
+
+.activity {
+  &.filled {
+    --action-button-bg: var(--bg-activity);
+    --action-button-bg-hover: var(--bg-activity-hover);
+    --action-button-bg-active: var(--bg-activity-active);
+    --action-button-bg-disabled: var(--bg-activity-disabled);
+    --action-button-color: var(--texticon-on-color);
+    --action-button-color-hover: var(--texticon-on-color);
+    --action-button-color-active: var(--texticon-on-color);
+    --action-button-color-disabled: var(--texticon-on-color-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-activity-muted-hover);
+    --action-button-bg-active: var(--bg-activity-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-activity);
+    --action-button-color-hover: var(--texticon-activity-hover);
+    --action-button-color-active: var(--texticon-activity-active);
+    --action-button-color-disabled: var(--texticon-activity-disabled);
+    --action-button-border: var(--border-activity);
+    --action-button-border-hover: var(--border-activity);
+    --action-button-border-active: var(--border-activity-active);
+    --action-button-border-disabled: var(--border-activity-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-activity-muted-hover);
+    --action-button-bg-active: var(--bg-activity-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-activity);
+    --action-button-color-hover: var(--texticon-activity-hover);
+    --action-button-color-active: var(--texticon-activity-active);
+    --action-button-color-disabled: var(--texticon-activity-disabled);
+  }
+}
+
+/* ─── Special ─── */
+
+.special {
+  &.filled {
+    --action-button-bg: var(--bg-special);
+    --action-button-bg-hover: var(--bg-special-hover);
+    --action-button-bg-active: var(--bg-special-active);
+    --action-button-bg-disabled: var(--bg-special-disabled);
+    --action-button-color: var(--texticon-on-color);
+    --action-button-color-hover: var(--texticon-on-color);
+    --action-button-color-active: var(--texticon-on-color);
+    --action-button-color-disabled: var(--texticon-on-color-disabled);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-special-muted-hover);
+    --action-button-bg-active: var(--bg-special-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-special);
+    --action-button-color-hover: var(--texticon-special-hover);
+    --action-button-color-active: var(--texticon-special-active);
+    --action-button-color-disabled: var(--texticon-special-disabled);
+    --action-button-border: var(--border-special);
+    --action-button-border-hover: var(--border-special);
+    --action-button-border-active: var(--border-special-active);
+    --action-button-border-disabled: var(--border-special-alt);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-special-muted-hover);
+    --action-button-bg-active: var(--bg-special-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-special);
+    --action-button-color-hover: var(--texticon-special-hover);
+    --action-button-color-active: var(--texticon-special-active);
+    --action-button-color-disabled: var(--texticon-special-disabled);
+  }
+}
+
+/* ─── White (for use on dark backgrounds) ─── */
+
+.white {
+  &.filled {
+    --action-button-bg: var(--bg-white);
+    --action-button-bg-hover: var(--bg-white-hover);
+    --action-button-bg-active: var(--bg-white-active);
+    --action-button-bg-disabled: var(--bg-white-disabled);
+    --action-button-color: var(--texticon-black);
+    --action-button-color-hover: var(--texticon-black);
+    --action-button-color-active: var(--texticon-black);
+    --action-button-color-disabled: var(--texticon-black);
+  }
+
+  &.outline {
+    --action-button-bg: transparent;
+    --action-button-bg-hover: var(--bg-white-muted-alt);
+    --action-button-bg-active: var(--bg-white-muted-active);
+    --action-button-bg-disabled: transparent;
+    --action-button-color: var(--texticon-white);
+    --action-button-color-hover: var(--texticon-white);
+    --action-button-color-active: var(--texticon-white);
+    --action-button-color-disabled: var(--texticon-white-disabled);
+    --action-button-border: var(--border-white-soft);
+    --action-button-border-hover: var(--border-white-soft-active);
+    --action-button-border-active: var(--border-white-soft-active);
+    --action-button-border-disabled: var(--border-white-soft);
+  }
+
+  &.ghost {
+    --action-button-bg: var(--bg-ghost);
+    --action-button-bg-hover: var(--bg-white-muted-alt);
+    --action-button-bg-active: var(--bg-white-muted-active);
+    --action-button-bg-disabled: var(--bg-ghost-disabled);
+    --action-button-color: var(--texticon-white);
+    --action-button-color-hover: var(--texticon-white);
+    --action-button-color-active: var(--texticon-white);
+    --action-button-color-disabled: var(--texticon-white-disabled);
+  }
+}
+
+/* ─── Icon slot ─── */
+
+.iconSlot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: contents;
+}

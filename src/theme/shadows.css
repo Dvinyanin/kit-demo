@@ -1,0 +1,21 @@
+:root {
+  /* Shadow composites — atoms come from light.css / dark.css */
+  --shadow-0: 0px 0px 0px 1px var(--effects-shadow-0-1);
+  --shadow-50: 0px 1px 2px 0px var(--effects-shadow-50-1);
+  --shadow-100: 0px 2px 10px -2px var(--effects-shadow-100-1);
+  --shadow-on-white-100:
+    0px 2px 10px -2px var(--effects-shadow-on-white-100-2),
+    0px 0px 1px 0px var(--effects-shadow-on-white-100-1);
+  --shadow-300: 0px 4px 16px -4px var(--effects-shadow-300-1);
+  --shadow-on-white-300:
+    0px 4px 16px -4px var(--effects-shadow-on-white-300-2),
+    0px 0px 1px 0px var(--effects-shadow-on-white-300-1);
+  --shadow-500: 0px 8px 32px -8px var(--effects-shadow-500-1);
+  --shadow-on-white-500:
+    0px 8px 32px -8px var(--effects-shadow-on-white-500-2),
+    0px 0px 1px 0px var(--effects-shadow-on-white-500-1);
+  --shadow-popover-500:
+    0px 8px 32px -8px var(--effects-shadow-popover-500-3),
+    0px -2px 6px 0px var(--effects-shadow-popover-500-2),
+    0px 0px 1px 0px var(--effects-shadow-popover-500-1);
+}

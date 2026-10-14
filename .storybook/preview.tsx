@@ -5,28 +5,18 @@ import { IconContext } from "../src/components/Icon";
 import { icons } from "../src/icons";
 
 const preview: Preview = {
-  globalTypes: {
-    theme: {
-      description: "Color theme",
-      toolbar: {
-        title: "Theme",
-        icon: "circlehollow",
-        items: [
-          { value: "light", title: "Light", icon: "sun" },
-          { value: "dark", title: "Dark", icon: "moon" },
-        ],
-        dynamicTitle: true,
-      },
-    },
-  },
   initialGlobals: {
-    theme: "light",
+    isDarkTheme: false,
+    withBackground: false,
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme ?? "light";
-      document.documentElement.setAttribute("data-theme", theme);
-      document.documentElement.style.backgroundColor = theme === "dark" ? "#141414" : "";
+      const isDarkTheme = context.globals.isDarkTheme ?? false;
+      const withBackground = context.globals.withBackground ?? false;
+      document.documentElement.setAttribute("data-theme", isDarkTheme ? "dark" : "light");
+      document.documentElement.style.backgroundColor = withBackground
+        ? "var(--bg-surface-slate)"
+        : "var(--bg-page-secondary)";
       return (
         <IconContext.Provider value={icons}>
           <Story />

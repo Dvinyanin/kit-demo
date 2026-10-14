@@ -1,65 +1,50 @@
-/* Primitive color tokens — do not use directly in components, use tokens.css instead */
+/* Auto-generated from Value.tokens.json — do not edit manually */
+
 :root {
-  /* Brand */
   --brand: #bed600;
   --brand-a20: rgba(190, 214, 0, 0.2);
   --brand-a40: rgba(190, 214, 0, 0.4);
   --brand-gray: #747679;
-
-  /* Neutral */
   --neutral-10: #f6f6f8;
   --neutral-20: #f6f8fc;
-  --neutral-20-adapt: rgba(78, 118, 196, 0.05);
   --neutral-30: #f1f3f8;
-  --neutral-30-a50: rgba(241, 243, 248, 0.5);
   --neutral-40: #eceff5;
-  --neutral-40-adapt: rgba(69, 88, 147, 0.1);
   --neutral-50: #dde3ed;
-  --neutral-50-a50: rgba(221, 227, 237, 0.5);
-  --neutral-50-adapt: rgba(27, 67, 134, 0.15);
   --neutral-60: #d0d6e1;
-  --neutral-60-a50: rgba(208, 214, 225, 0.5);
-  --neutral-60-a60: rgba(208, 214, 225, 0.6);
-  --neutral-60-adapt: rgba(20, 50, 105, 0.2);
   --neutral-80: #95a0b3;
-  --neutral-80-a25: rgba(149, 160, 179, 0.25);
-  --neutral-80-a50: rgba(149, 160, 179, 0.5);
-  --neutral-80-a75: rgba(149, 160, 179, 0.75);
-  --neutral-80-adapt: rgba(78, 97, 128, 0.6);
   --neutral-100: #7a869a;
   --neutral-300: #505f79;
   --neutral-500: #27344b;
   --neutral-900: #222a37;
   --neutral-920: #222428;
-  --neutral-900-a06: rgba(34, 42, 55, 0.06);
-  --neutral-900-a10: rgba(34, 42, 55, 0.1);
-  --neutral-900-a12: rgba(34, 42, 55, 0.12);
-  --neutral-900-a13: rgba(34, 42, 55, 0.13);
-  --neutral-900-a15: rgba(34, 42, 55, 0.15);
-  --neutral-900-a16: rgba(34, 42, 55, 0.16);
-  --neutral-900-a26: rgba(34, 42, 55, 0.26);
-  --neutral-900-a30: rgba(34, 42, 55, 0.3);
-  --neutral-900-a40: rgba(34, 42, 55, 0.4);
-
-  /* Dark Neutral */
+  --neutral-20-adapt: rgba(78, 118, 196, 0.05);
+  --neutral-30-a50: rgba(241, 243, 248, 0.5);
+  --neutral-40-adapt: rgba(69, 88, 147, 0.1);
+  --neutral-50-adapt: rgba(27, 67, 134, 0.15);
+  --neutral-50-a50: rgba(221, 227, 237, 0.5);
+  --neutral-60-adapt: rgba(20, 50, 105, 0.2);
+  --neutral-60-a50: rgba(208, 214, 225, 0.5);
+  --neutral-60-a60: rgba(208, 214, 225, 0.6);
+  --neutral-80-adapt: rgba(78, 97, 128, 0.6);
+  --neutral-80-a25: rgba(149, 160, 179, 0.25);
+  --neutral-80-a50: rgba(149, 160, 179, 0.5);
+  --neutral-80-a75: rgba(149, 160, 179, 0.75);
   --dark-neutral-200: #727273;
   --dark-neutral-300: #636364;
   --dark-neutral-400: #454547;
+  --dark-neutral-500: #383838;
+  --dark-neutral-800: #2d2d2d;
+  --dark-neutral-900: #242424;
+  --dark-neutral-950: #1e1e1f;
+  --dark-neutral-990: #1c1c1c;
+  --dark-neutral-1000: #141414;
   --dark-neutral-400-a20: rgba(69, 69, 71, 0.2);
   --dark-neutral-400-a30: rgba(69, 69, 71, 0.3);
   --dark-neutral-400-a50: rgba(69, 69, 71, 0.5);
   --dark-neutral-400-a60: rgba(69, 69, 71, 0.6);
   --dark-neutral-400-a80: rgba(69, 69, 71, 0.8);
-  --dark-neutral-500: #383838;
-  --dark-neutral-800: #2d2d2d;
   --dark-neutral-800-a60: rgba(45, 45, 45, 0.6);
-  --dark-neutral-900: #242424;
   --dark-neutral-900-a50: rgba(36, 36, 36, 0.5);
-  --dark-neutral-950: #1e1e1f;
-  --dark-neutral-990: #1c1c1c;
-  --dark-neutral-1000: #141414;
-
-  /* White */
   --white-100: #ffffff;
   --white-a5: rgba(255, 255, 255, 0.05);
   --white-a10: rgba(255, 255, 255, 0.1);
@@ -73,8 +58,6 @@
   --white-a70: rgba(255, 255, 255, 0.7);
   --white-a80: rgba(255, 255, 255, 0.8);
   --white-a85: rgba(255, 255, 255, 0.85);
-
-  /* Black */
   --black-100: #000000;
   --black-a5: rgba(0, 0, 0, 0.05);
   --black-a10: rgba(0, 0, 0, 0.1);
@@ -88,139 +71,125 @@
   --black-a70: rgba(0, 0, 0, 0.7);
   --black-a80: rgba(0, 0, 0, 0.8);
   --black-a85: rgba(0, 0, 0, 0.85);
-
-  /* Green (brand accent scale) */
   --green-50: #f4f9e6;
-  --green-50-adapt: rgba(181, 215, 87, 0.15);
   --green-200: #d4e3ac;
-  --green-200-a50: rgba(212, 227, 172, 0.5);
-  --green-200-a70: rgba(212, 227, 172, 0.7);
   --green-300: #b6df20;
   --green-500: #a3c723;
-  --green-500-a20: rgba(163, 199, 35, 0.2);
-  --green-500-a50: rgba(163, 199, 35, 0.5);
   --green-600: #97ba1e;
-  --green-600-a25: rgba(151, 186, 30, 0.25);
-  --green-600-a50: rgba(151, 186, 30, 0.5);
   --green-700: #8dad1c;
   --green-800: #81a11a;
   --green-850: #5e8507;
   --green-900: #547012;
-  --green-900-a25: rgba(84, 112, 18, 0.25);
   --green-950: #505930;
-  --green-950-a30: rgba(80, 89, 48, 0.3);
   --green-1000: #303b15;
-
-  /* Teal */
+  --green-50-adapt: rgba(181, 215, 87, 0.15);
+  --green-200-a50: rgba(212, 227, 172, 0.5);
+  --green-200-a70: rgba(212, 227, 172, 0.7);
+  --green-500-a20: rgba(163, 199, 35, 0.2);
+  --green-500-a50: rgba(163, 199, 35, 0.5);
+  --green-600-a25: rgba(151, 186, 30, 0.25);
+  --green-600-a50: rgba(151, 186, 30, 0.5);
+  --green-900-a25: rgba(84, 112, 18, 0.25);
+  --green-950-a30: rgba(80, 89, 48, 0.3);
   --teal-50: #e8f9fb;
-  --teal-50-adapt: rgba(101, 215, 228, 0.15);
   --teal-200: #8ce3ea;
-  --teal-200-a40: rgba(140, 227, 234, 0.4);
-  --teal-200-a50: rgba(140, 227, 234, 0.5);
   --teal-300: #32d1ec;
   --teal-500: #1db3cd;
-  --teal-500-a20: rgba(29, 179, 205, 0.2);
-  --teal-500-a50: rgba(29, 179, 205, 0.5);
   --teal-600: #00a4ba;
-  --teal-600-a25: rgba(0, 164, 186, 0.25);
-  --teal-600-a50: rgba(0, 164, 186, 0.5);
   --teal-700: #0092a6;
   --teal-800: #0b7483;
   --teal-900: #075c68;
-  --teal-900-a25: rgba(7, 92, 104, 0.25);
   --teal-950: #365457;
-  --teal-950-a30: rgba(54, 84, 87, 0.3);
   --teal-1000: #1e4347;
-
-  /* Blue */
+  --teal-50-adapt: rgba(101, 215, 228, 0.15);
+  --teal-200-a40: rgba(140, 227, 234, 0.4);
+  --teal-200-a50: rgba(140, 227, 234, 0.5);
+  --teal-500-a20: rgba(29, 179, 205, 0.2);
+  --teal-500-a50: rgba(29, 179, 205, 0.5);
+  --teal-600-a25: rgba(0, 164, 186, 0.25);
+  --teal-600-a50: rgba(0, 164, 186, 0.5);
+  --teal-900-a25: rgba(7, 92, 104, 0.25);
+  --teal-950-a30: rgba(54, 84, 87, 0.3);
   --blue-25: #f5f8ff;
-  --blue-25-adapt: rgba(188, 208, 255, 0.15);
   --blue-50: #ebf1ff;
-  --blue-50-adapt: rgba(121, 161, 255, 0.15);
   --blue-200: #aabffc;
+  --blue-300: #709bff;
+  --blue-500: #5487fc;
+  --blue-600: #577edc;
+  --blue-700: #4c6ebf;
+  --blue-800: #395cb1;
+  --blue-900: #19468d;
+  --blue-950: #384570;
+  --blue-1000: #293559;
+  --blue-25-adapt: rgba(188, 208, 255, 0.15);
+  --blue-50-adapt: rgba(121, 161, 255, 0.15);
   --blue-200-a15: rgba(170, 191, 252, 0.15);
   --blue-200-a25: rgba(170, 191, 252, 0.25);
   --blue-200-a40: rgba(170, 191, 252, 0.4);
   --blue-200-a50: rgba(170, 191, 252, 0.5);
-  --blue-300: #709bff;
-  --blue-500: #5487fc;
   --blue-500-a20: rgba(84, 135, 252, 0.2);
   --blue-500-a50: rgba(84, 135, 252, 0.5);
-  --blue-600: #577edc;
   --blue-600-a25: rgba(87, 126, 220, 0.25);
-  --blue-700: #4c6ebf;
-  --blue-800: #395cb1;
-  --blue-900: #19468d;
   --blue-900-a25: rgba(25, 69, 141, 0.25);
-  --blue-950: #384570;
   --blue-950-a30: rgba(56, 69, 112, 0.3);
-  --blue-1000: #293559;
-
-  /* Orange */
   --orange-50: #fff4e9;
-  --orange-50-adapt: rgba(255, 181, 107, 0.15);
   --orange-200: #fcd3a9;
-  --orange-200-a50: rgba(252, 211, 169, 0.5);
   --orange-300: #feb152;
   --orange-500: #fda83f;
-  --orange-500-a20: rgba(253, 168, 63, 0.2);
-  --orange-500-a50: rgba(253, 168, 63, 0.5);
   --orange-600: #ff991f;
-  --orange-600-a25: rgba(255, 153, 31, 0.25);
-  --orange-600-a50: rgba(255, 153, 31, 0.5);
   --orange-700: #e3891c;
   --orange-800: #c87520;
   --orange-900: #965817;
-  --orange-900-a25: rgba(150, 88, 23, 0.25);
   --orange-950: #63482c;
-  --orange-950-a25: rgba(99, 72, 44, 0.25);
   --orange-1000: #4b3925;
+  --orange-50-adapt: rgba(255, 181, 107, 0.15);
+  --orange-200-a50: rgba(252, 211, 169, 0.5);
+  --orange-500-a20: rgba(253, 168, 63, 0.2);
+  --orange-500-a50: rgba(253, 168, 63, 0.5);
+  --orange-600-a25: rgba(255, 153, 31, 0.25);
+  --orange-600-a50: rgba(255, 153, 31, 0.5);
   --orange-deep-700: #f17210;
-
-  /* Red */
+  --orange-900-a25: rgba(150, 88, 23, 0.25);
+  --orange-950-a25: rgba(99, 72, 44, 0.25);
   --red-50: #feedee;
-  --red-50-adapt: rgba(250, 165, 170, 0.2);
   --red-200: #f7949a;
-  --red-200-a25: rgba(247, 148, 154, 0.25);
-  --red-200-a50: rgba(247, 148, 154, 0.5);
   --red-300: #f87977;
   --red-500: #fa6361;
-  --red-500-a20: rgba(250, 99, 97, 0.2);
-  --red-500-a50: rgba(250, 99, 97, 0.5);
   --red-600: #f14d56;
-  --red-600-a25: rgba(241, 77, 86, 0.25);
-  --red-600-a50: rgba(241, 77, 86, 0.5);
   --red-700: #d9454d;
   --red-800: #c13e45;
   --red-900: #912e34;
-  --red-900-a25: rgba(145, 46, 52, 0.25);
   --red-950: #6c4243;
-  --red-950-a30: rgba(108, 66, 67, 0.3);
   --red-1000: #543132;
-
-  /* Violet */
+  --red-50-adapt: rgba(250, 165, 170, 0.2);
+  --red-200-a25: rgba(247, 148, 154, 0.25);
+  --red-200-a50: rgba(247, 148, 154, 0.5);
+  --red-500-a20: rgba(250, 99, 97, 0.2);
+  --red-500-a50: rgba(250, 99, 97, 0.5);
+  --red-600-a25: rgba(241, 77, 86, 0.25);
+  --red-600-a50: rgba(241, 77, 86, 0.5);
+  --red-900-a25: rgba(145, 46, 52, 0.25);
+  --red-950-a30: rgba(108, 66, 67, 0.3);
   --violet-25: #f5f0ff;
-  --violet-25-adapt: rgba(188, 154, 255, 0.15);
   --violet-50: #efe9fb;
   --violet-100: #e9deff;
   --violet-200: #d2bcf9;
-  --violet-200-a40: rgba(210, 188, 249, 0.4);
   --violet-300: #b492fc;
   --violet-500: #a17aff;
-  --violet-500-a20: rgba(161, 122, 255, 0.2);
-  --violet-500-a50: rgba(161, 122, 255, 0.5);
   --violet-600: #7e57c2;
-  --violet-600-a25: rgba(126, 87, 194, 0.25);
-  --violet-600-a50: rgba(126, 87, 194, 0.5);
   --violet-700: #7450b2;
   --violet-800: #62419b;
   --violet-900: #4e3479;
-  --violet-900-a25: rgba(78, 52, 121, 0.25);
   --violet-950: #60507c;
-  --violet-950-a30: rgba(96, 80, 124, 0.3);
   --violet-1000: #372a51;
-
-  /* Yellow */
+  --violet-25-adapt: rgba(188, 154, 255, 0.15);
+  --violet-200-a40: rgba(210, 188, 249, 0.4);
+  --violet-500-a20: rgba(161, 122, 255, 0.2);
+  --violet-500-a50: rgba(161, 122, 255, 0.5);
+  --violet-600-a25: rgba(126, 87, 194, 0.25);
+  --violet-600-a50: rgba(126, 87, 194, 0.5);
+  --violet-900-a25: rgba(78, 52, 121, 0.25);
+  --violet-950-a30: rgba(96, 80, 124, 0.3);
   --yellow-500: #ffc20d;
   --yellow-muted-500: #f0c74c;
 }

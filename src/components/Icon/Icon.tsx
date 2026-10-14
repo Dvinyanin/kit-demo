@@ -1,4 +1,4 @@
-import { use } from "react";
+import { isValidElement, use, type ReactElement, type ReactNode } from "react";
 
 import type { IconName } from "@/icons";
 
@@ -14,4 +14,10 @@ export function Icon({ type }: IconProps) {
   const __html = use(IconContext)?.[type] ?? type;
 
   return <div aria-hidden="true" className={styles.icon} dangerouslySetInnerHTML={{ __html }} />;
+}
+
+export type IIcon = IconName | ReactElement;
+
+export function renderIcon(icon: IIcon): ReactNode {
+  return isValidElement(icon) ? icon : <Icon type={icon as IconName} />;
 }

@@ -1,6 +1,7 @@
-import { figmaUrl } from "@storybook/figma";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+
+import { figmaUrl } from "@/storybook/figma";
 
 import { Select } from "./Select";
 

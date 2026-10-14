@@ -1,3 +1,5 @@
+/* Auto-generated from Dark 🍊.tokens.json — do not edit manually */
+
 [data-theme="dark"] {
   --bg-page-primary: var(--dark-neutral-1000);
   --bg-page-secondary: var(--dark-neutral-990);
@@ -9,6 +11,7 @@
   --bg-surface-black: var(--black-100);
   --bg-surface-slate: var(--neutral-500);
   --bg-surface-graphite: var(--dark-neutral-200);
+  --bg-transparent: transparent;
   --bg-highlight: var(--green-50-adapt);
   --bg-highlight-on-text: var(--green-950);
   --bg-favorite: var(--yellow-muted-500);
@@ -163,45 +166,6 @@
   --texticon-danger-active: var(--red-800);
   --texticon-danger-disabled: var(--red-950);
   --texticon-favorite: var(--yellow-500);
-  --icon-secondary: var(--white-a70);
-  --icon-secondary-hover: var(--white-100);
-  --icon-tertiary-thin: var(--white-a40);
-  --icon-tertiary-hover: var(--white-a70);
-  --icon-quaternary: var(--white-a30);
-  --icon-on-accent: var(--black-a70);
-  --icon-active: var(--white-a80);
-  --icon-disabled: var(--white-a20);
-  --icon-disabled-alt: var(--white-a15);
-  --icon-black: var(--neutral-900);
-  --icon-black-disabled: var(--black-a32);
-  --icon-white: var(--white-100);
-  --icon-white-disabled: var(--white-a60);
-  --icon-white-muted: var(--white-a25);
-  --icon-accent: var(--green-500);
-  --icon-accent-alt: var(--green-500);
-  --icon-accent-hover: var(--green-300);
-  --icon-accent-active: var(--green-800);
-  --icon-accent-disabled: var(--green-950);
-  --icon-info: var(--blue-500);
-  --icon-info-hover: var(--blue-300);
-  --icon-info-active: var(--blue-800);
-  --icon-info-disabled: var(--blue-950);
-  --icon-activity: var(--teal-500);
-  --icon-activity-hover: var(--teal-300);
-  --icon-activity-active: var(--teal-800);
-  --icon-activity-disabled: var(--teal-950);
-  --icon-special: var(--violet-500);
-  --icon-special-hover: var(--violet-300);
-  --icon-special-active: var(--violet-800);
-  --icon-special-disabled: var(--violet-950);
-  --icon-warning: var(--orange-600);
-  --icon-warning-hover: var(--orange-300);
-  --icon-warning-active: var(--orange-800);
-  --icon-warning-disabled: var(--orange-950);
-  --icon-danger: var(--red-500);
-  --icon-danger-hover: var(--red-300);
-  --icon-danger-active: var(--red-800);
-  --icon-danger-disabled: var(--red-950);
   --border: var(--white-a15);
   --border-alt: var(--white-a10);
   --border-active: var(--white-a30);
@@ -250,4 +214,18 @@
   --tag-container-silver: var(--white-a10);
   --tag-on-container-silver: var(--white-a40);
   --effects-focus-ring: var(--green-500);
+  --effects-shadow-0-1: rgba(255, 255, 255, 0.08);
+  --effects-shadow-50-1: rgba(0, 0, 0, 0.3);
+  --effects-shadow-100-1: rgba(0, 0, 0, 0.3);
+  --effects-shadow-on-white-100-1: rgba(255, 255, 255, 0.25);
+  --effects-shadow-on-white-100-2: rgba(0, 0, 0, 0.3);
+  --effects-shadow-300-1: rgba(0, 0, 0, 0.4);
+  --effects-shadow-on-white-300-1: rgba(255, 255, 255, 0.3);
+  --effects-shadow-on-white-300-2: rgba(0, 0, 0, 0.4);
+  --effects-shadow-500-1: rgba(0, 0, 0, 0.48);
+  --effects-shadow-on-white-500-1: rgba(255, 255, 255, 0.3);
+  --effects-shadow-on-white-500-2: rgba(0, 0, 0, 0.48);
+  --effects-shadow-popover-500-1: transparent;
+  --effects-shadow-popover-500-2: rgba(0, 0, 0, 0.3);
+  --effects-shadow-popover-500-3: rgba(0, 0, 0, 0.6);
 }
