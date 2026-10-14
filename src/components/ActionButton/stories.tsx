@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { figmaUrl } from "@/storybook/figma";
-import { iconNames } from "@/storybook/icons";
+import { iconControl } from "@/storybook/icons";
 
 import { ActionButton } from "./ActionButton";
 import { actionButtonModes, actionButtonSizes, actionButtonVariants } from "./constants";
-
-const iconControl = { control: { type: "select" as const }, options: [undefined, ...iconNames] };
 
 const meta: Meta<typeof ActionButton> = {
   title: "Components/ActionButton",

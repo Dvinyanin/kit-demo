@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { figmaUrl } from "../../../.storybook/figma";
-import { icons } from "../../icons";
+import { figmaUrl } from "@/storybook/figma";
+import { iconNames } from "@/storybook/icons";
+
 import { Icon } from "./Icon";
 import type { IconName } from "./IconProvider";
 
@@ -26,7 +27,7 @@ export const All: Story = {
   name: "All icons",
   render: () => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-      {(Object.keys(icons) as IconName[]).map((name) => (
+      {iconNames.map((name) => (
         <div
           key={name}
           title={name}
@@ -69,7 +70,7 @@ export const GradientCustomize: StoryObj<GradientArgs> = {
   argTypes: {
     type: {
       control: "select",
-      options: Object.keys(icons).filter((icon) => icon.includes("accent")),
+      options: iconNames.filter((icon) => icon.includes("accent")),
     },
     externalGradient: { control: "boolean", name: "External gradient" },
     iconColor: {

@@ -1,0 +1,151 @@
+.textButton {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  text-decoration: none;
+  color: var(--text-button-color);
+  transition: color 100ms;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-button-color-hover);
+      --text-button-icon-bg: var(--text-button-icon-bg-hover);
+      --text-button-icon-color: var(--text-button-icon-color-hover);
+    }
+  }
+
+  &:active {
+    color: var(--text-button-color-active);
+    --text-button-icon-bg: var(--text-button-icon-bg-active);
+    --text-button-icon-color: var(--text-button-icon-color-active);
+  }
+
+  &[data-disabled] {
+    color: var(--text-button-color-disabled);
+    cursor: not-allowed;
+    --text-button-icon-bg: var(--text-button-icon-bg-disabled);
+    --text-button-icon-color: var(--text-button-icon-color-disabled);
+  }
+}
+
+/* ─── Modes ─── */
+
+.primary {
+  gap: 6px;
+}
+
+.secondary {
+  gap: 2px;
+}
+
+/* ─── Sizes ─── */
+
+.medium {
+  composes: body-medium-strong from global;
+  --icon-size: 20px;
+  --text-button-slot-size: 24px;
+}
+
+.small {
+  composes: body-small-strong from global;
+  --icon-size: 16px;
+  --text-button-slot-size: 16px;
+}
+
+/* ─── Icon slots ─── */
+
+.iconSlot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--text-button-slot-size);
+  height: var(--text-button-slot-size);
+  border-radius: 50%;
+  transition:
+    background-color 100ms,
+    color 100ms;
+}
+
+.primary .iconSlot {
+  background-color: var(--text-button-icon-bg);
+  color: var(--text-button-icon-color);
+}
+
+.label {
+  display: contents;
+}
+
+/* ─── Accent ─── */
+
+.accent {
+  --text-button-color: var(--texticon-accent);
+  --text-button-color-hover: var(--texticon-accent-hover);
+  --text-button-color-active: var(--texticon-accent-active);
+  --text-button-color-disabled: var(--texticon-accent-disabled);
+  --text-button-icon-bg: var(--bg-accent-muted);
+  --text-button-icon-bg-hover: var(--bg-accent-hover);
+  --text-button-icon-bg-active: var(--bg-accent-active);
+  --text-button-icon-bg-disabled: var(--bg-accent-muted-disabled);
+  --text-button-icon-color: var(--texticon-accent);
+  --text-button-icon-color-hover: var(--texticon-on-color);
+  --text-button-icon-color-active: var(--texticon-on-color);
+  --text-button-icon-color-disabled: var(--texticon-accent-disabled);
+}
+
+/* ─── Neutral ─── */
+
+.neutral {
+  --text-button-color: var(--texticon-medium);
+  --text-button-color-hover: var(--texticon-medium-hover);
+  --text-button-color-active: var(--texticon-active);
+  --text-button-color-disabled: var(--texticon-disabled);
+  --text-button-icon-bg: var(--bg-semisilver);
+  --text-button-icon-bg-hover: var(--bg-semisilver-hover);
+  --text-button-icon-bg-active: var(--bg-semisilver-active);
+  --text-button-icon-bg-disabled: var(--bg-semisilver-disabled);
+  --text-button-icon-color: var(--texticon-medium);
+  --text-button-icon-color-hover: var(--texticon-on-color);
+  --text-button-icon-color-active: var(--texticon-on-color);
+  --text-button-icon-color-disabled: var(--texticon-disabled);
+}
+
+/* ─── Info ─── */
+
+.info {
+  --text-button-color: var(--texticon-info);
+  --text-button-color-hover: var(--texticon-info-hover);
+  --text-button-color-active: var(--texticon-info-active);
+  --text-button-color-disabled: var(--texticon-info-disabled);
+  --text-button-icon-bg: var(--bg-info-muted);
+  --text-button-icon-bg-hover: var(--bg-info-hover);
+  --text-button-icon-bg-active: var(--bg-info-active);
+  --text-button-icon-bg-disabled: var(--bg-info-muted-disabled);
+  --text-button-icon-color: var(--texticon-info);
+  --text-button-icon-color-hover: var(--texticon-on-color);
+  --text-button-icon-color-active: var(--texticon-on-color);
+  --text-button-icon-color-disabled: var(--texticon-info-disabled);
+}
+
+/* ─── Destructive ─── */
+
+.destructive {
+  --text-button-color: var(--texticon-danger);
+  --text-button-color-hover: var(--texticon-danger-hover);
+  --text-button-color-active: var(--texticon-danger-active);
+  --text-button-color-disabled: var(--texticon-danger-disabled);
+  --text-button-icon-bg: var(--bg-danger-muted);
+  --text-button-icon-bg-hover: var(--bg-danger-hover);
+  --text-button-icon-bg-active: var(--bg-danger-active);
+  --text-button-icon-bg-disabled: var(--bg-danger-muted-disabled);
+  --text-button-icon-color: var(--texticon-danger);
+  --text-button-icon-color-hover: var(--texticon-on-color);
+  --text-button-icon-color-active: var(--texticon-on-color);
+  --text-button-icon-color-disabled: var(--texticon-danger-disabled);
+}

@@ -23,14 +23,14 @@
   }
 
   @media (hover: hover) {
-    &:hover:not([data-disabled]) {
+    &:hover {
       background-color: var(--action-button-bg-hover);
       color: var(--action-button-color-hover);
       border-color: var(--action-button-border-hover, transparent);
     }
   }
 
-  &[data-active]:not([data-disabled]) {
+  &:active {
     background-color: var(--action-button-bg-active);
     color: var(--action-button-color-active);
     border-color: var(--action-button-border-active, transparent);
