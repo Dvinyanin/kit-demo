@@ -7,3 +7,5 @@ dist
 .playwright-mcp/
 .tmp/
 storybook-static
+# Vitest browser-mode artifacts (diffs of failed screenshot tests)
+.vitest/

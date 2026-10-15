@@ -69,3 +69,10 @@ Full process: [docs/figma-workflow.md](docs/figma-workflow.md). Read it before s
 - **State stories mirror the Showcase grid 1:1** and contain only static states (Default, Error, Disabled, Read Only). Focus/Open/Hover are verified by clicking via Playwright, not shown in the grid.
 - **Dark theme:** semantic tokens must not differ between Figma and our themes. If they do, report it as a Figma issue for the designer — don't adapt the code.
 - **Temporary artifacts** (screenshots, Figma dumps, scratch scripts) go to `.tmp/` (gitignored), never into `docs/`. `docs/` holds only what gets committed: the workflow doc and component specs.
+
+## Visual tests
+
+- Screenshot tests run through `vp test` (Vitest browser mode, Playwright Chromium; `visual` project in `vite.config.ts`). Tests live next to the component as `*.test.tsx` and reuse stories via `composeStories`; Storybook decorators/theme come from `tests/setup.visual.ts`.
+- One screenshot per matrix story (`AllVariants` with a `variant` arg: modes × sizes × default/disabled/icons). Baselines are in `__screenshots__/` next to the test and are platform-specific (`*-chromium-win32.png`); the project is local-only, no CI.
+- A missing baseline is created on the first run (the test reports it as a failure by design). Review the new PNG, then re-run. After an intended visual change delete the stale PNG (or run `vp test run -u`) and review the diff.
+- Static states only in the matrices: Hover/Focus are not covered. Select/MultiSelect popups are covered by tests that click the trigger and screenshot the whole page (the popup renders in a portal).

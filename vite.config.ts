@@ -1,4 +1,5 @@
 import { defineConfig } from "vite-plus";
+import { playwright } from "vite-plus/test/browser-playwright";
 
 export default defineConfig({
   resolve: {
@@ -15,6 +16,29 @@ export default defineConfig({
       generator: "tsgo",
     },
     exports: true,
+  },
+  test: {
+    projects: [
+      {
+        extends: true,
+        test: { name: "unit", include: ["tests/**/*.test.ts"] },
+      },
+      {
+        extends: true,
+        test: {
+          name: "visual",
+          include: ["src/**/*.test.tsx"],
+          setupFiles: ["tests/setup.visual.ts"],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: "chromium" }],
+            viewport: { width: 1000, height: 800 },
+          },
+        },
+      },
+    ],
   },
   lint: {
     options: {

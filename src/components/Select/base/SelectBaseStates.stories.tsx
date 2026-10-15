@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { figmaUrl } from "@/storybook/figma";
 
@@ -50,11 +50,13 @@ function StateGrid({
   placeholder,
   value,
   renderValue,
+  extra,
 }: {
   label?: string;
   placeholder?: string;
   value?: string;
   renderValue?: (value: string | null) => ReactNode;
+  extra?: Partial<ComponentProps<typeof SelectBase>>;
 }) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", gap: 24 }}>
@@ -71,6 +73,7 @@ function StateGrid({
             placeholder={placeholder}
             value={value}
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -82,6 +85,7 @@ function StateGrid({
             placeholder={placeholder}
             value={value}
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -97,6 +101,7 @@ function StateGrid({
             value={value}
             error="Caption text"
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -109,6 +114,7 @@ function StateGrid({
             value={value}
             error="Caption text"
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -124,6 +130,7 @@ function StateGrid({
             value={value}
             disabled
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -136,6 +143,7 @@ function StateGrid({
             value={value}
             disabled
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -151,6 +159,7 @@ function StateGrid({
             value={value}
             readOnly
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -163,6 +172,7 @@ function StateGrid({
             value={value}
             readOnly
             renderValue={renderValue}
+            {...extra}
           >
             {ITEMS}
           </SelectBase>
@@ -204,5 +214,43 @@ export const OnlyPlaceholder: Story = {
   name: "Only Placeholder",
   render() {
     return <StateGrid placeholder="Placeholder" />;
+  },
+};
+
+export const AllSlots: Story = {
+  name: "All slots",
+  render() {
+    return (
+      <StateGrid
+        label="Label"
+        value="1"
+        renderValue={() => "Text"}
+        extra={{
+          iconLeft: "filter",
+          iconRight: "help-circle-filled",
+          onIconRightClick: () => undefined,
+          iconRightLabel: "Подсказка",
+          suffix: "RUB",
+          clearable: true,
+        }}
+      />
+    );
+  },
+};
+
+export const Caption: Story = {
+  name: "Caption",
+  parameters: {
+    design: { type: "figma", url: figmaUrl("showcase", "3809-51461") },
+  },
+  render() {
+    return (
+      <StateGrid
+        label="Label"
+        value="1"
+        renderValue={() => "Text"}
+        extra={{ caption: "Caption text" }}
+      />
+    );
   },
 };

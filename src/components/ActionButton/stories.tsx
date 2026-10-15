@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import type { ComponentProps } from "react";
 
 import { figmaUrl } from "@/storybook/figma";
 import { iconControl } from "@/storybook/icons";
@@ -37,6 +38,11 @@ export default meta;
 type Story = StoryObj<typeof ActionButton>;
 
 const sizes = actionButtonSizes;
+const rows: { key: string; props: Partial<ComponentProps<typeof ActionButton>> }[] = [
+  { key: "default", props: {} },
+  { key: "disabled", props: { disabled: true } },
+  { key: "icons", props: { iconLeft: "heart", iconRight: "heart" } },
+];
 const modes = actionButtonModes;
 
 export const Playground: Story = {
@@ -49,18 +55,20 @@ export const AllVariants: Story = {
   render({ variant }) {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {modes.map((mode) => (
-          <div
-            key={mode}
-            style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}
-          >
-            {sizes.map((size) => (
-              <ActionButton key={size} variant={variant} mode={mode} size={size}>
-                {size}
-              </ActionButton>
-            ))}
-          </div>
-        ))}
+        {modes.map((mode) =>
+          rows.map(({ key, props }) => (
+            <div
+              key={`${mode}-${key}`}
+              style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}
+            >
+              {sizes.map((size) => (
+                <ActionButton key={size} variant={variant} mode={mode} size={size} {...props}>
+                  {size}
+                </ActionButton>
+              ))}
+            </div>
+          )),
+        )}
       </div>
     );
   },
