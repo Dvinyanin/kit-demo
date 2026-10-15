@@ -20,6 +20,7 @@
     "dev": "vp pack --watch",
     "test": "vp test",
     "check": "vp check",
+    "stylelint": "stylelint \"src/**/*.css\"",
     "prepublishOnly": "vp run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -41,6 +42,9 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "storybook": "^10.6.2",
+    "stylelint": "^17.16.0",
+    "stylelint-config-css-modules": "^4.6.0",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "^7.0.2",
     "vite-plus": "catalog:"
   },

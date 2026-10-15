@@ -1,231 +1,227 @@
-/* Typography classes — apply directly to elements */
+/* ─── Typography tokens ─────────────────────────────────────────────────────── */
+
+:root {
+  /* Header */
+  --header-h1: 700 44px/50px arial, sans-serif;
+  --header-h1-letter-spacing: -0.2px;
+  --header-h2: 700 32px/40px arial, sans-serif;
+  --header-h2-letter-spacing: -0.15px;
+  --header-h3: 700 28px/36px arial, sans-serif;
+  --header-h3-letter-spacing: 0;
+  --header-h4: 700 24px/32px arial, sans-serif;
+  --header-h4-letter-spacing: 0;
+
+  /* Title */
+  --title-x-large: 700 20px/28px arial, sans-serif;
+  --title-x-large-letter-spacing: 0;
+  --title-large: 700 18px/26px arial, sans-serif;
+  --title-large-letter-spacing: 0;
+  --title-medium: 700 16px/24px arial, sans-serif;
+  --title-medium-letter-spacing: 0;
+  --title-small: 700 14px/20px arial, sans-serif;
+  --title-small-letter-spacing: 0.15px;
+
+  /* Body */
+  --body-4x-large: 400 44px/44px arial, sans-serif;
+  --body-4x-large-letter-spacing: -0.15px;
+  --body-3x-large: 400 32px/40px arial, sans-serif;
+  --body-3x-large-letter-spacing: -0.15px;
+  --body-2x-large: 400 20px/26px arial, sans-serif;
+  --body-2x-large-letter-spacing: 0;
+  --body-2x-large-spacious: 400 20px/28px arial, sans-serif;
+  --body-2x-large-spacious-letter-spacing: 0;
+  --body-x-large: 400 18px/23px arial, sans-serif;
+  --body-x-large-letter-spacing: 0;
+  --body-x-large-spacious: 400 18px/26px arial, sans-serif;
+  --body-x-large-spacious-letter-spacing: 0;
+  --body-large: 400 16px/22px arial, sans-serif;
+  --body-large-letter-spacing: 0;
+  --body-large-spacious: 400 16px/24px arial, sans-serif;
+  --body-large-spacious-letter-spacing: 0;
+  --body-large-strong: 700 16px/22px arial, sans-serif;
+  --body-large-strong-letter-spacing: 0;
+  --body-medium: 400 14px/18px arial, sans-serif;
+  --body-medium-letter-spacing: 0.15px;
+  --body-medium-spacious: 400 14px/20px arial, sans-serif;
+  --body-medium-spacious-letter-spacing: 0.15px;
+  --body-medium-strong: 700 14px/18px arial, sans-serif;
+  --body-medium-strong-letter-spacing: 0.15px;
+  --body-small: 400 12px/16px arial, sans-serif;
+  --body-small-letter-spacing: 0.2px;
+  --body-small-strong: 700 12px/16px arial, sans-serif;
+  --body-small-strong-letter-spacing: 0.2px;
+  --body-x-small: 400 10px/14px arial, sans-serif;
+  --body-x-small-letter-spacing: 0.2px;
+  --body-x-small-strong: 700 10px/14px arial, sans-serif;
+  --body-x-small-strong-letter-spacing: 0.2px;
+
+  /* Reduced Body */
+  --reduced-body-large: 400 15px/22px arial, sans-serif;
+  --reduced-body-large-letter-spacing: 0;
+  --reduced-body-large-strong: 700 15px/22px arial, sans-serif;
+  --reduced-body-large-strong-letter-spacing: 0;
+  --reduced-body-medium: 400 13px/18px arial, sans-serif;
+  --reduced-body-medium-letter-spacing: 0.15px;
+  --reduced-body-medium-strong: 700 13px/18px arial, sans-serif;
+  --reduced-body-medium-strong-letter-spacing: 0.15px;
+  --reduced-body-small: 400 11px/16px arial, sans-serif;
+  --reduced-body-small-letter-spacing: 0.2px;
+  --reduced-body-small-strong: 700 11px/16px arial, sans-serif;
+  --reduced-body-small-strong-letter-spacing: 0.2px;
+}
+
+/* ─── Typography classes — apply directly to elements ───────────────────────── */
 
 /* ─── Header ─── */
 .header-h1 {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 44px;
-  line-height: 50px;
-  letter-spacing: -0.0045em;
+  font: var(--header-h1);
+  letter-spacing: var(--header-h1-letter-spacing);
 }
 
 .header-h2 {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: -0.0047em;
+  font: var(--header-h2);
+  letter-spacing: var(--header-h2-letter-spacing);
 }
 
 .header-h3 {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 36px;
+  font: var(--header-h3);
+  letter-spacing: var(--header-h3-letter-spacing);
 }
 
 .header-h4 {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
+  font: var(--header-h4);
+  letter-spacing: var(--header-h4-letter-spacing);
 }
 
 /* ─── Title ─── */
 .title-x-large {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
+  font: var(--title-x-large);
+  letter-spacing: var(--title-x-large-letter-spacing);
 }
 
 .title-large {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
+  font: var(--title-large);
+  letter-spacing: var(--title-large-letter-spacing);
 }
 
 .title-medium {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
+  font: var(--title-medium);
+  letter-spacing: var(--title-medium-letter-spacing);
 }
 
 .title-small {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.0107em;
+  font: var(--title-small);
+  letter-spacing: var(--title-small-letter-spacing);
 }
 
 /* ─── Body ─── */
 .body-4x-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 44px;
-  line-height: 44px;
-  letter-spacing: -0.0034em;
+  font: var(--body-4x-large);
+  letter-spacing: var(--body-4x-large-letter-spacing);
 }
 
 .body-3x-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: -0.0047em;
+  font: var(--body-3x-large);
+  letter-spacing: var(--body-3x-large-letter-spacing);
 }
 
 .body-2x-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 26px;
+  font: var(--body-2x-large);
+  letter-spacing: var(--body-2x-large-letter-spacing);
 }
 
 .body-2x-large-spacious {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
+  font: var(--body-2x-large-spacious);
+  letter-spacing: var(--body-2x-large-spacious-letter-spacing);
 }
 
 .body-x-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
+  font: var(--body-x-large);
+  letter-spacing: var(--body-x-large-letter-spacing);
 }
 
 .body-x-large-spacious {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 26px;
+  font: var(--body-x-large-spacious);
+  letter-spacing: var(--body-x-large-spacious-letter-spacing);
 }
 
 .body-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
+  font: var(--body-large);
+  letter-spacing: var(--body-large-letter-spacing);
 }
 
 .body-large-spacious {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font: var(--body-large-spacious);
+  letter-spacing: var(--body-large-spacious-letter-spacing);
 }
 
 .body-large-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
+  font: var(--body-large-strong);
+  letter-spacing: var(--body-large-strong-letter-spacing);
 }
 
 .body-medium {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0.0107em;
+  font: var(--body-medium);
+  letter-spacing: var(--body-medium-letter-spacing);
 }
 
 .body-medium-spacious {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.0107em;
+  font: var(--body-medium-spacious);
+  letter-spacing: var(--body-medium-spacious-letter-spacing);
 }
 
 .body-medium-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0.0107em;
+  font: var(--body-medium-strong);
+  letter-spacing: var(--body-medium-strong-letter-spacing);
 }
 
 .body-small {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.0167em;
+  font: var(--body-small);
+  letter-spacing: var(--body-small-letter-spacing);
 }
 
 .body-small-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.0167em;
+  font: var(--body-small-strong);
+  letter-spacing: var(--body-small-strong-letter-spacing);
 }
 
 .body-x-small {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 14px;
-  letter-spacing: 0.02em;
+  font: var(--body-x-small);
+  letter-spacing: var(--body-x-small-letter-spacing);
 }
 
 .body-x-small-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  line-height: 14px;
-  letter-spacing: 0.02em;
+  font: var(--body-x-small-strong);
+  letter-spacing: var(--body-x-small-strong-letter-spacing);
 }
 
 /* ─── Reduced Body ─── */
 .reduced-body-large {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 22px;
+  font: var(--reduced-body-large);
+  letter-spacing: var(--reduced-body-large-letter-spacing);
 }
 
 .reduced-body-large-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 22px;
+  font: var(--reduced-body-large-strong);
+  letter-spacing: var(--reduced-body-large-strong-letter-spacing);
 }
 
 .reduced-body-medium {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.0115em;
+  font: var(--reduced-body-medium);
+  letter-spacing: var(--reduced-body-medium-letter-spacing);
 }
 
 .reduced-body-medium-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.0115em;
+  font: var(--reduced-body-medium-strong);
+  letter-spacing: var(--reduced-body-medium-strong-letter-spacing);
 }
 
 .reduced-body-small {
-  font-family: Arial, sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: 0.0182em;
+  font: var(--reduced-body-small);
+  letter-spacing: var(--reduced-body-small-letter-spacing);
 }
 
 .reduced-body-small-strong {
-  font-family: Arial, sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: 0.0182em;
+  font: var(--reduced-body-small-strong);
+  letter-spacing: var(--reduced-body-small-strong-letter-spacing);
 }

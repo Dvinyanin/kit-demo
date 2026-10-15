@@ -56,3 +56,16 @@ Token naming follows Figma variable paths with slashes replaced by dashes. Examp
 - **Never use raw colors** (`#fff`, `rgb(...)`, `rgba(...)`). Always use CSS custom properties from `tokens.css`.
 - **Never use raw font sizes, weights, or line-heights**. Always use typography classes via `composes: <class> from global` in CSS Modules, or apply the class directly in HTML.
 - **Never use raw `box-shadow` values**. Always use shadow tokens from `tokens.css`: `--shadow-0`, `--shadow-50`, `--shadow-100`, `--shadow-300`, `--shadow-500`, `--shadow-on-white-100/300/500`, `--shadow-popover-500`.
+
+## Figma → Storybook workflow
+
+Full process: [docs/figma-workflow.md](docs/figma-workflow.md). Read it before starting or verifying any component.
+
+- **Order: spec → code → verification.** Build `docs/specs/<component>.md` (node map, state × element → token table, sizes, behaviour, open questions) and get it approved before writing code.
+- **Two Figma files, different jobs.** Components (`BWW9…`) = library: variants (`State=…`), component props, token bindings. Showcase (`GmAU…`) = documentation: which states/content combinations exist, behaviour text, and `Guides` (paddings, gaps, animation). A Select is assembled from several pages (Field/trigger, Dropdown popup, Specificaton, Guides) — see §1 of the workflow doc.
+- **Never infer tokens from screenshots.** Take them from `get_design_context` per state cell or per library variant. Icons come as SVG with hex — map back to a token including `fill-opacity` (e.g. `#95A0B3` @ 0.5 = `--texticon-disabled-alt`); mark ambiguous mappings with `?`.
+- **Work at section level** (`_Section`). Whole spec pages are too large for `get_design_context`; use `get_metadata` on them only as a table of contents.
+- **Verify by token names, not by eye:** Figma returns colors as `var(--token, …)` — the same names as in our CSS, so compare names per state × element against the component's `.module.css`. Geometry is checked by measuring in Storybook (Figma measures paddings from the outer edge, CSS padding from inside the 1px border — subtract it).
+- **State stories mirror the Showcase grid 1:1** and contain only static states (Default, Error, Disabled, Read Only). Focus/Open/Hover are verified by clicking via Playwright, not shown in the grid.
+- **Dark theme:** semantic tokens must not differ between Figma and our themes. If they do, report it as a Figma issue for the designer — don't adapt the code.
+- **Temporary artifacts** (screenshots, Figma dumps, scratch scripts) go to `.tmp/` (gitignored), never into `docs/`. `docs/` holds only what gets committed: the workflow doc and component specs.

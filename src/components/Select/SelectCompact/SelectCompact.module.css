@@ -1,0 +1,60 @@
+/* ─── Trigger ──────────────────────────────────────────────────────────────── */
+
+.trigger {
+  composes: body-large from global;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 0;
+  margin: 0;
+  border: none;
+  background: none;
+  color: var(--texticon);
+  cursor: default;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+
+  &[data-disabled] {
+    color: var(--texticon-disabled);
+    cursor: not-allowed;
+  }
+
+  &[data-popup-open] {
+    color: var(--texticon-active);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--effects-focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+.triggerBold {
+  composes: body-large-strong from global;
+}
+
+.value {
+  &[data-placeholder] {
+    color: var(--texticon-secondary);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  --icon-size: 16px;
+
+  transition: rotate 150ms ease;
+
+  .trigger[data-popup-open] & {
+    rotate: 180deg;
+  }
+
+  .trigger[data-disabled] & {
+    color: var(--texticon-disabled);
+  }
+}

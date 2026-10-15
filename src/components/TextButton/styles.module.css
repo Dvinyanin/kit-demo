@@ -15,6 +15,7 @@
   @media (hover: hover) {
     &:hover {
       color: var(--text-button-color-hover);
+
       --text-button-icon-bg: var(--text-button-icon-bg-hover);
       --text-button-icon-color: var(--text-button-icon-color-hover);
     }
@@ -22,6 +23,7 @@
 
   &:active {
     color: var(--text-button-color-active);
+
     --text-button-icon-bg: var(--text-button-icon-bg-active);
     --text-button-icon-color: var(--text-button-icon-color-active);
   }
@@ -29,6 +31,7 @@
   &[data-disabled] {
     color: var(--text-button-color-disabled);
     cursor: not-allowed;
+
     --text-button-icon-bg: var(--text-button-icon-bg-disabled);
     --text-button-icon-color: var(--text-button-icon-color-disabled);
   }
@@ -48,12 +51,14 @@
 
 .medium {
   composes: body-medium-strong from global;
+
   --icon-size: 20px;
   --text-button-slot-size: 24px;
 }
 
 .small {
   composes: body-small-strong from global;
+
   --icon-size: 16px;
   --text-button-slot-size: 16px;
 }
