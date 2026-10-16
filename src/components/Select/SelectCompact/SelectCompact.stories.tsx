@@ -3,16 +3,28 @@ import { useState } from "react";
 
 import { figmaUrl } from "@/storybook/figma";
 
+import { SelectIcon } from "../base/SelectIcon";
 import { SelectCompact } from "./SelectCompact";
 
-const ITEMS = [
+interface Option {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+const OPTIONS: Option[] = [
   { value: "one", label: "Пункт 1" },
   { value: "two", label: "Пункт 2" },
   { value: "three", label: "Пункт 3" },
+  { value: "four", label: "Пункт 4", disabled: true },
 ];
 
-const meta: Meta<typeof SelectCompact> = {
-  title: "Components/SelectCompact",
+const getOptionId = (option: Option) => option.value;
+const getValueView = (option: Option) => option.label;
+const isOptionDisabled = (option: Option) => Boolean(option.disabled);
+
+const meta: Meta<SelectCompact.Props<Option>> = {
+  title: "Components/Selects/SelectCompact",
   component: SelectCompact,
   parameters: {
     design: {
@@ -21,6 +33,14 @@ const meta: Meta<typeof SelectCompact> = {
     },
   },
   argTypes: {
+    // Значение хранит история, а список и функции заданы в args, поэтому в панели Controls их нет
+    value: { table: { disable: true } },
+    onChange: { table: { disable: true } },
+    options: { table: { disable: true } },
+    getOptionId: { table: { disable: true } },
+    getValueView: { table: { disable: true } },
+    getOptionView: { table: { disable: true } },
+    isOptionDisabled: { table: { disable: true } },
     fontStyle: { control: { type: "radio" }, options: ["default", "bold"] },
     disabled: { control: "boolean" },
     placeholder: { control: "text" },
@@ -29,228 +49,76 @@ const meta: Meta<typeof SelectCompact> = {
     fontStyle: "default",
     disabled: false,
     placeholder: "Выберите...",
+    options: OPTIONS,
+    getOptionId,
+    getValueView,
+    isOptionDisabled,
   },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof SelectCompact>;
+type Story = StoryObj<SelectCompact.Props<Option>>;
+
+// Все истории это один компонент с разными аргументами: начальное значение лежит в `args.value`
+function Controlled(args: SelectCompact.Props<Option>) {
+  const [value, setValue] = useState(args.value);
+  return <SelectCompact {...args} value={value} onChange={setValue} />;
+}
 
 export const Playground: Story = {
-  render(args) {
-    const [value, setValue] = useState("");
-    return (
-      <SelectCompact
-        {...args}
-        value={value}
-        onValueChange={(v) => setValue(Array.isArray(v) ? (v[0] ?? "") : (v ?? ""))}
-      >
-        {ITEMS.map((item) => (
-          <SelectCompact.Item key={item.value} value={item.value}>
-            {item.label}
-          </SelectCompact.Item>
-        ))}
-      </SelectCompact>
-    );
-  },
-};
-
-export const Default: Story = {
-  name: "Default (placeholder)",
-  render() {
-    const [value, setValue] = useState("");
-    return (
-      <SelectCompact
-        value={value}
-        onValueChange={(v) => setValue(v ?? "")}
-        placeholder="Выберите..."
-      >
-        {ITEMS.map((item) => (
-          <SelectCompact.Item key={item.value} value={item.value}>
-            {item.label}
-          </SelectCompact.Item>
-        ))}
-      </SelectCompact>
-    );
-  },
+  render: (args) => <Controlled {...args} />,
 };
 
 export const Filled: Story = {
   name: "Filled (value selected)",
-  render() {
-    const [value, setValue] = useState("two");
-    return (
-      <SelectCompact value={value} onValueChange={(v) => setValue(v ?? "")}>
-        {ITEMS.map((item) => (
-          <SelectCompact.Item key={item.value} value={item.value}>
-            {item.label}
-          </SelectCompact.Item>
-        ))}
-      </SelectCompact>
-    );
-  },
+  args: { value: OPTIONS[1] },
+  render: (args) => <Controlled {...args} />,
 };
 
 export const Bold: Story = {
   name: "Bold",
-  render() {
-    const [value, setValue] = useState("one");
-    return (
-      <SelectCompact fontStyle="bold" value={value} onValueChange={(v) => setValue(v ?? "")}>
-        {ITEMS.map((item) => (
-          <SelectCompact.Item key={item.value} value={item.value}>
-            {item.label}
-          </SelectCompact.Item>
-        ))}
-      </SelectCompact>
-    );
-  },
+  args: { fontStyle: "bold", value: OPTIONS[1] },
+  render: (args) => <Controlled {...args} />,
 };
 
 export const Disabled: Story = {
   name: "Disabled",
-  render() {
-    return (
-      <SelectCompact disabled defaultValue="one" placeholder="Недоступно">
-        {ITEMS.map((item) => (
-          <SelectCompact.Item key={item.value} value={item.value}>
-            {item.label}
-          </SelectCompact.Item>
-        ))}
-      </SelectCompact>
-    );
-  },
+  args: { disabled: true, value: OPTIONS[1] },
+  render: (args) => <Controlled {...args} />,
 };
 
-export const WithGroups: Story = {
-  name: "With groups",
-  render() {
-    const [value, setValue] = useState("");
-    return (
-      <SelectCompact
-        value={value}
-        onValueChange={(v) => setValue(v ?? "")}
-        placeholder="Выберите..."
-      >
-        <SelectCompact.Group label="Группа A">
-          <SelectCompact.Item value="a1">Пункт A1</SelectCompact.Item>
-          <SelectCompact.Item value="a2">Пункт A2</SelectCompact.Item>
-        </SelectCompact.Group>
-        <SelectCompact.Separator />
-        <SelectCompact.Group label="Группа B">
-          <SelectCompact.Item value="b1">Пункт B1</SelectCompact.Item>
-          <SelectCompact.Item value="b2">Пункт B2</SelectCompact.Item>
-          <SelectCompact.Item value="b3" disabled>
-            Пункт B3 (недоступен)
-          </SelectCompact.Item>
-        </SelectCompact.Group>
-      </SelectCompact>
-    );
-  },
-};
+interface Status {
+  value: string;
+  label: string;
+  icon: "status-success-small" | "status-warning-small" | "status-error-small";
+}
 
-export const Open: Story = {
-  name: "Open (dropdown demo)",
+const STATUSES: Status[] = [
+  { value: "success", label: "Успех", icon: "status-success-small" },
+  { value: "warning", label: "Предупреждение", icon: "status-warning-small" },
+  { value: "error", label: "Ошибка", icon: "status-error-small" },
+];
+
+export const WithIcons: StoryObj = {
+  name: "Options with icons",
   parameters: { controls: { disable: true } },
   render() {
-    const [value, setValue] = useState("two");
+    const [value, setValue] = useState<Status | undefined>(STATUSES[0]);
     return (
-      <div style={{ paddingBottom: 300 }}>
-        <SelectCompact defaultOpen value={value} onValueChange={(v) => setValue(v ?? "")}>
-          {ITEMS.map((item) => (
-            <SelectCompact.Item key={item.value} value={item.value}>
-              {item.label}
-            </SelectCompact.Item>
-          ))}
-        </SelectCompact>
-      </div>
-    );
-  },
-};
-
-export const WithIconsInItems: Story = {
-  name: "Items with icons",
-  render() {
-    const [value, setValue] = useState("");
-    return (
-      <div style={{ paddingBottom: 300 }}>
-        <SelectCompact
-          defaultOpen
-          placeholder="Статус..."
-          value={value}
-          onValueChange={(v) => setValue(v ?? "")}
-        >
-          <SelectCompact.Item value="success" iconLeft="status-success-small">
-            Успешно
-          </SelectCompact.Item>
-          <SelectCompact.Item value="warning" iconLeft="status-warning-small">
-            Предупреждение
-          </SelectCompact.Item>
-          <SelectCompact.Item value="error" iconLeft="status-error-small">
-            Ошибка
-          </SelectCompact.Item>
-        </SelectCompact>
-      </div>
-    );
-  },
-};
-
-export const MultiSelect: Story = {
-  name: "Multi-select (checkboxes)",
-  render() {
-    const [values, setValues] = useState<string[]>([]);
-    return (
-      <div style={{ paddingBottom: 300 }}>
-        <SelectCompact
-          defaultOpen
-          multiple={true}
-          placeholder="Выберите..."
-          value={values}
-          onValueChange={setValues}
-        >
-          {ITEMS.map((item) => (
-            <SelectCompact.MultiSelectItem key={item.value} value={item.value}>
-              {item.label}
-            </SelectCompact.MultiSelectItem>
-          ))}
-        </SelectCompact>
-      </div>
-    );
-  },
-};
-
-export const NestedGroups: Story = {
-  name: "Nested groups",
-  render() {
-    const [value, setValue] = useState("");
-    return (
-      <div style={{ paddingBottom: 400 }}>
-        <SelectCompact
-          defaultOpen
-          placeholder="Выберите..."
-          value={value}
-          onValueChange={(v) => setValue(v ?? "")}
-        >
-          <SelectCompact.Group label="Группа A">
-            <SelectCompact.Item value="a1">Пункт A1</SelectCompact.Item>
-            <SelectCompact.NestedGroup label="Подгруппа A1">
-              <SelectCompact.Item value="a1-1">Пункт A1.1</SelectCompact.Item>
-              <SelectCompact.Item value="a1-2">Пункт A1.2</SelectCompact.Item>
-            </SelectCompact.NestedGroup>
-            <SelectCompact.Item value="a2">Пункт A2</SelectCompact.Item>
-          </SelectCompact.Group>
-          <SelectCompact.Separator />
-          <SelectCompact.Group label="Группа B">
-            <SelectCompact.Item value="b1">Пункт B1</SelectCompact.Item>
-            <SelectCompact.NestedGroup label="Подгруппа B1">
-              <SelectCompact.Item value="b1-1">Пункт B1.1</SelectCompact.Item>
-              <SelectCompact.Item value="b1-2" disabled>
-                Пункт B1.2 (недоступен)
-              </SelectCompact.Item>
-            </SelectCompact.NestedGroup>
-          </SelectCompact.Group>
-        </SelectCompact>
-      </div>
+      <SelectCompact
+        placeholder="Выберите..."
+        options={STATUSES}
+        getOptionId={(status) => status.value}
+        getValueView={(status) => status.label}
+        getOptionView={(status) => (
+          <SelectCompact.OptionContent prefix={<SelectIcon type={status.icon} />}>
+            {status.label}
+          </SelectCompact.OptionContent>
+        )}
+        value={value}
+        onChange={setValue}
+      />
     );
   },
 };

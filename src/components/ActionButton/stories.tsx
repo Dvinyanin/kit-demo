@@ -8,7 +8,7 @@ import { ActionButton } from "./ActionButton";
 import { actionButtonModes, actionButtonSizes, actionButtonVariants } from "./constants";
 
 const meta: Meta<typeof ActionButton> = {
-  title: "Components/ActionButton",
+  title: "Components/Buttons/ActionButton",
   component: ActionButton,
   parameters: {
     design: {

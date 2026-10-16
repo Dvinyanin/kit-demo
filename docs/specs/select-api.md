@@ -1,98 +1,119 @@
 # Select: публичный API и структура
 
-Описывает, из каких компонентов состоит семейство Select, что получает пользователь библиотеки и как это лежит в `src/components/Select/`. Визуальные спеки отдельных частей: [select-default.md](select-default.md) (триггер), [select-dropdown-simple.md](select-dropdown-simple.md) (попап), [select-multiple.md](select-multiple.md) (мультивыбор).
+Описывает, из каких компонентов состоит семейство Select, что получает пользователь библиотеки и как это лежит в `src/components/Select/`. Визуальные спеки отдельных частей: [select-default.md](select-default.md) (триггер), [select-dropdown-simple.md](select-dropdown-simple.md) (список), [select-multiple.md](select-multiple.md) (мультивыбор).
 
-Статус: от 2026-10-15; реализовано `Select`, `MultiSelect`, `Select.Base`, `MultiSelect.Base`, `SelectCompact`. Остальное в §6.
+Статус: от 2026-10-15; реализовано `Select`, `MultiSelect`, `SelectCompact`. Остальное в §7.
 
-## 1. Решения
+## 1. Модель: четыре роли
+
+| Роль                       | Что знает                                                                                                 | Кто                                                             |
+| -------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Оболочка**               | значение, `multiple`, очистка, Read Only; триггер получает через `renderTrigger`, список через `children` | `SelectCore`                                                    |
+| **Триггер** (их несколько) | только внешний вид                                                                                        | `SelectTrigger` (поле), `SelectCompactTrigger`; позже чипсы     |
+| **Список**                 | окно списка, ячейки, содержимое ячейки                                                                    | `SelectPopup`, `SelectItem`, `MultiSelectItem`, `OptionContent` |
+| **Адаптер**                | `options` → ячейки, значение ↔ `onChange`                                                                 | `Select`, `MultiSelect`, `SelectCompact`                        |
+
+Адаптер собирает оболочку, триггер и список: список он кладёт в `SelectCore` как `children` (`<SelectPopup size>…ячейки…</SelectPopup>`), поэтому настройки списка (размер, позже шапка, подвал, ширина) задаются там, где вызывается оболочка, а `SelectCore` про список ничего не знает. Составного слоя `*.Base` нет (удалён 2026-10-15): кому нужны `children` или собственные стили ячейки, берёт `SelectCore` + `SelectTrigger` + `Item` напрямую (пример: ячейка со статусом в `Components/Selects/Select/Cells`). Эти части пока внутренние (не экспортируются из `src/index.ts`).
+
+## 2. Решения
 
 Приняты 2026-10-15:
 
-1. **Слои.** `Select` и `MultiSelect`: управляемые, готовые к использованию, без композиции, принимают `options`. `Select.Base` и `MultiSelect.Base`: те же поля с составным API через `children` для кастомных случаев (группы, разделители, вложенность). `SelectCompact`: отдельный компонент (у него нет размера Micro). `ComboBox`: отдельный компонент для поиска.
+1. **Адаптеры.** `Select` и `MultiSelect`: управляемые, готовые к использованию, принимают `options`. `SelectCompact`: тот же API, что у `Select`, но триггер без рамки и без размера Micro. `ComboBox`: отдельный компонент для поиска.
 2. **Без внутреннего состояния.** Значение всегда приходит снаружи (`value`, `onChange`), `defaultValue` нет. Исключений нет: очистка тоже идёт через `onChange`.
-3. **Пустое значение** это `undefined` (для `MultiSelect` пустой массив при очистке, `undefined` на входе). `null` в публичном API не используется. В `*.Base` остаются имена Base UI (`value`, `onValueChange`, `null`).
-4. **Плоские экспорты:** `Select`, `MultiSelect`, позднее `AsyncSelect`, `AsyncMultiSelect`. Вложенные пространства имён (`Select.Multi.Async`) не делаем: неудобны для дженериков. Единственное статическое поле: `.Base`.
-5. **Группы, разделители, вложенность** не входят в `options`: либо отдельный вид компонента, либо потребитель собирает список из `Select.Base.*`.
-6. **Поиск и фильтрация** только в `ComboBox`, в `Select` их нет.
-7. **Мультивыбор:** значения строкой через запятую; действия (выбрать всё, футер) не делаем.
-8. **Загрузка** (`isLoading`, `hasMore`, `loadMore`) и `Async`-обёртки пока не делаем; контракт `fetchOptions` проектируется вместе с `Async`.
+3. **Пустое значение** это `undefined` (для `MultiSelect` пустой массив при очистке, `undefined` на входе). `null` в публичном API не используется. Преобразование `null` ↔ `undefined` делает `SelectCore`: Base UI получает `null` и `[]`, наружу уходит `undefined` и `[]`.
+4. **Значение поля — сам элемент списка** (как в Base UI): `options` это любой массив (строки, числа, объекты), `value` и `onChange` работают с элементами, а не с id. Подпись выбранного значения всегда есть (она в самом элементе). Тип значения не ограничен строкой.
+5. **Функции вместо полей** (`OptionProps`): `getOptionId(item)` (`string | number`, по умолчанию `String`: ключ списка и сравнение выбранного), `getValueView(item)` (что показать в триггере, `ReactNode`, по умолчанию id), `getOptionView(item)` (содержимое ячейки списка, `ReactNode`, по умолчанию `getValueView`), `isOptionDisabled(item)`. Для строк и чисел функции не нужны.
+6. **Слоты ячейки** (префикс, суффикс, подпись под текстом) даёт компонент `Select.OptionContent` (`MultiSelect.OptionContent`, `SelectCompact.OptionContent`), который возвращается из `getOptionView`. `prefix` (код или иконка `<Select.Icon />`) считается текстом, остальное оформляет потребитель. Пустые слоты проверяет `isReactNodeNotEmpty`.
+7. **В `MultiSelect`** значения в триггере: `getValueView` каждого выбранного через запятую (агрегат вроде «выбрано 3» пока нельзя). Действия (выбрать всё, футер) не делаем.
+8. **Плоские экспорты:** `Select`, `MultiSelect`, `SelectCompact`, позднее `AsyncSelect`, `AsyncMultiSelect`. Статические поля: `Icon`, `OptionContent`.
+9. **Типы лежат в пространстве имён компонента** (как в Base UI): `Select.Props<Item>`, `MultiSelect.Props<Item>`, `SelectCompact.Props<Item>`. Отдельных экспортов типов из `src/index.ts` нет.
+10. **Пропсы адаптеров не наследуют пропсы Base UI.** Только перечисленные в §3 (поля триггера, `disabled`, `required`, `readOnly`, `value`, `onChange`, `options`, функции списка). Нужное из Base UI (`name`, `id`, форма) добавляется по мере необходимости: пока `Select` не участвует в отправке нативной формы.
+11. **Кликабельные иконки** задаются компонентом `Select.Icon` (`MultiSelect.Icon`) прямо в `iconLeft` и `iconRight`. Триггер всегда `div` (внутри бывают кнопки).
+12. **Группы, разделители, вложенность** не поддерживаются до спеки (`Dropdown [Nested]`, Group Header). Секция Showcase `Grouped` тоже не делается.
+13. **Read Only** не открывает список (ни мышью, ни клавиатурой) и не меняет значение.
+14. **Ошибка:** `invalid` окрашивает поле, `error` (`ReactNode`) выводит подпись ошибки и по умолчанию включает `invalid`.
+15. **Поиск и фильтрация** только в `ComboBox`, в `Select` их нет.
+16. **Загрузка** (`isLoading`, `hasMore`, `loadMore`) и `Async`-обёртки пока не делаем; контракт `fetchOptions` проектируется вместе с `Async`.
+17. **Доступность** (видимый фокус триггера, `aria-invalid` и `aria-describedby` для ошибки и подписи) пока не делаем.
+18. **Ширина** поля задаётся только родителем: поле растягивается на 100%.
 
-## 2. Публичный API
+## 3. Публичный API
 
 ```tsx
-interface SelectOption<V extends string = string> {
-  value: V;
-  label: string;
-  subtext?: string;
-  suffix?: string;
-  code?: string;
-  icon?: IIcon;
-  disabled?: boolean;
-}
-
-<Select
-  value={value}                          // V | undefined
-  onChange={(v) => …}                    // (v: V | undefined) => void, undefined при очистке
-  options={options}
-  renderOption={(option) => node}        // содержимое ячейки (например StatusTag)
-  renderValue={(option) => node}         // что показать в триггере; по умолчанию label
-  // поля триггера, общие с MultiSelect и *.Base:
-  label placeholder caption error required disabled readOnly size
-  iconLeft iconRight onIconRightClick iconRightLabel suffix clearable clearLabel
+<Select<User>
+  options={users}                         // любой массив: строки, числа, объекты
+  value={user}                            // User | undefined (сам элемент)
+  onChange={(user) => …}                  // (user: User | undefined) => void, undefined при очистке
+  getOptionId={(u) => u.id}               // string | number; по умолчанию String(item)
+  getValueView={(u) => u.name}            // триггер; по умолчанию id
+  getOptionView={(u) => (                 // ячейка списка; по умолчанию как в триггере
+    <Select.OptionContent prefix="643" suffix="₽" subtext="RUB">{u.name}</Select.OptionContent>
+  )}
+  isOptionDisabled={(u) => u.locked}      // необязательно
+  // поля триггера, общие с MultiSelect:
+  label placeholder caption error invalid required disabled readOnly size
+  iconLeft iconRight suffix clearable clearLabel    // иконка: имя или <Select.Icon type onClick label />
 />
 
+<Select options={["Москва", "Казань"]} value={city} onChange={setCity} />   // строки без функций
+
 <MultiSelect
-  value={values}                         // V[] | undefined
-  onChange={(vs) => …}                   // (vs: V[]) => void, [] при очистке
-  options={options}                      // value, label, icon, disabled
-  renderValue={(selectedOptions) => node} // по умолчанию подписи через запятую
-  …поля триггера
+  value={users}                          // User[] | undefined
+  onChange={(users) => …}                // (users: User[]) => void, [] при очистке
+  options={users} getOptionId getValueView getOptionView isOptionDisabled
+  …поля триггера                         // в триггере getValueView каждого выбранного через запятую
+/>
+
+<SelectCompact
+  value onChange options getOptionId getValueView getOptionView isOptionDisabled   // как у Select
+  placeholder fontStyle="default" | "bold" disabled
 />
 ```
 
-`Select.Base` и `MultiSelect.Base`: компонент с `children`; части `Item`, `Group`, `NestedGroup`, `Separator` (для `MultiSelect.Base` `Item` это ячейка с чекбоксом). Это бывшие `SelectDefault` и `SelectMultiple` без изменений поведения, кроме именования.
+`Select.OptionContent`: `prefix` (код или иконка `<Select.Icon type="…" />`), `suffix`, `subtext`, `children` (текст).
 
-Что `Select` делает сверх `Select.Base`: превращает `options` в ячейки, по умолчанию показывает `label` выбранной опции, переводит `null` Base UI в `undefined`.
-
-## 3. Структура директории
+## 4. Структура директории
 
 ```
 src/components/Select/
-  Select/          Select (options) + Select.Base, истории Components/Select
-  MultiSelect/     MultiSelect (options) + MultiSelect.Base, истории Components/MultiSelect
-  SelectCompact/   инлайн-триггер без рамки
-  base/            SelectBase, MultiSelectBase, SelectField (внутренний триггер), SelectShared (попап, ячейки)
-                   и истории Figma-сверки (Components/Select/Base, Components/MultiSelect/Base)
+  Select/          Select; истории Components/Selects/Select (+ States, Cells по Showcase), тесты
+  MultiSelect/     MultiSelect, MultiSelectItem (ячейка с чекбоксом); истории Components/Selects/MultiSelect
+  SelectCompact/   SelectCompact, SelectCompactTrigger (текст и шеврон без рамки); истории Components/Selects/SelectCompact
+  base/            SelectCore (оболочка), SelectTrigger (поле), SelectPopup (окно списка), SelectItem (ячейка, OptionContent), SelectIcon, options.ts
   index.ts
   PLAN.md
 ```
 
-Старая заглушка `Select` (Root, Trigger, Content, Item из Initial commit) удалена. Составной API `SelectDefault`/`SelectMultiple` заменён на `Select.Base`/`MultiSelect.Base` (breaking, решено, пока библиотека не вышла).
+Старая заглушка `Select` (Root, Trigger, Content, Item из Initial commit) удалена. Составные `SelectDefault`/`SelectMultiple`, а затем слой `Select.Base` убраны (breaking, решено, пока библиотека не вышла).
 
-## 4. Соответствие старым именам
+## 5. Соответствие старым именам
 
-| Было                                      | Стало                                        |
-| ----------------------------------------- | -------------------------------------------- |
-| `SelectDefault` (children)                | `Select.Base`                                |
-| `SelectDefault.Item`                      | `Select.Base.Item`                           |
-| `SelectMultiple` (children)               | `MultiSelect.Base`                           |
-| `SelectMultiple.Item` / `MultiSelectItem` | `MultiSelect.Base.Item`                      |
-| `SelectDefaultProps<V>`                   | `SelectBaseProps<V>`                         |
-| `Select` (заглушка Root/Trigger/…)        | удалена                                      |
-| значение `null` при очистке               | `undefined` в `Select`, `[]` в `MultiSelect` |
+| Было                                                   | Стало                                                                                            |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `SelectDefault` / `SelectMultiple` (children)          | `Select` / `MultiSelect` с `options`; составной вариант: `SelectCore` + `SelectTrigger` + `Item` |
+| `SelectOption {value,label,subtext,…}`, `SelectProps`  | `options` любого вида + `getOptionId`/`getValueView`/`getOptionView`; `Select.Props`             |
+| `Item subtext suffix code iconLeft`                    | `<OptionContent subtext suffix prefix>` в `getOptionView`                                        |
+| `SelectCompact` (children, `defaultValue`, `multiple`) | `SelectCompact` с `options`; мультивыбора нет                                                    |
+| `*.Group`, `*.NestedGroup`, `*.Separator`              | удалены до спеки                                                                                 |
+| `onIconRightClick`, `iconRightLabel`                   | `<Select.Icon type onClick label />` в `iconRight`                                               |
+| значение `null` при очистке                            | `undefined` в `Select`, `[]` в `MultiSelect`                                                     |
 
-## 5. Проверка
+## 6. Проверка
 
-- `vp check` и `vp test` проходят (`tests/index.test.ts` пока заглушка без зависимости от компонентов).
-- Storybook: `Components/Select` (Playground, Micro, Subtext/suffix/code, Icons + clear, Custom option), `Components/MultiSelect` (Playground, Micro, Empty); истории Figma-сверки перенесены под `Components/Select/Base/*` и `Components/MultiSelect/Base`.
-- Выбор опции вызывает `onChange` с новым значением, очистка с `undefined` (мульти: `[]`), недоступная опция не выбирается, пользовательская опция (`renderOption`) и значение в триггере (`renderValue`) работают; плейсхолдер показывается для пустого значения.
-- Найдена и исправлена ошибка: при заданном `renderValue` текст плейсхолдера не показывался (Base UI приоритет отдаёт `children`). Теперь `SelectField` сам подставляет плейсхолдер для пустого значения.
+- `vp check` и `vp test` проходят.
+- Скриншотные тесты (`*.test.tsx` рядом с компонентами, Vitest browser mode): сетки `Components/Selects/Select/States` (все истории, включая `All slots`, `Caption`, `Required`), типы ячеек списка `Components/Selects/Select/Cells` (открытый список), закрытый `Select` с иконками, открытый список `Select` (Default, Micro, `OptionContent`, пользовательская ячейка), `MultiSelect` (открытый список Default и Micro, пустой), `SelectCompact` (закрытые состояния).
+- Поведенческие тесты: Read Only не открывает список и не вызывает `onChange` (мышь и клавиатура), очистка вызывает `onChange(undefined)` и не открывает список.
+- Найдена и исправлена ошибка: при заданной функции вида значения (тогда называлась `renderValue`) текст плейсхолдера не показывался (Base UI приоритет отдаёт `children`). Теперь `SelectTrigger` всегда сам рисует значение и сам подставляет плейсхолдер для пустого значения.
 
-## 6. Не сделано (по решению)
+## 7. Не сделано (по решению)
 
 - `isLoading`, `hasMore`, `loadMore`, состояние загрузки, ошибка с повтором.
 - `AsyncSelect` и `AsyncMultiSelect`. Контракт `fetchOptions` (курсор или страница, форма ответа, момент загрузки, отмена гонок) определяется при разработке.
-- **Подпись значения, которого нет в загруженных `options`.** Пример: форма редактирования получает `value="am"`, а в первых загруженных 20 опциях «Армении» нет, поэтому триггер покажет `am`. Решение понадобится вместе с `Async` (например `selectedOption`, или запрос по значению).
-- Группы, разделители, вложенность в `options`; ячейка Status как отдельный компонент; пустой список «Не найдено»; ограничение высоты списка; тёмная тема.
+- **Подпись значения вне загруженных `options`.** Значение теперь сам элемент (п. 4), поэтому подпись приходит вместе с ним. Остаётся вопрос формы редактирования: она должна получить элемент, а не id (например, запрос по id перед показом). Обсуждается вместе с `Async`.
+- Группы, разделители, вложенность; ячейка Status как отдельный компонент; пустой список «Не найдено»; ограничение высоты списка; тёмная тема; кнопка «More» в подписи ошибки.
+- Доступность (п. 17).
+- Публичный экспорт `SelectCore`, `SelectTrigger`, `Item` для сборки из частей и пропсы вроде `name`, `id` у `Select`.
+- Подпись и ошибка в отдельной обёртке поля, чтобы они не входили в `SelectTrigger` (нужно для `SelectCompactTrigger` и чипсов, где их нет).
 - `ComboBox` не трогали: отдельный компонент со своим кодом.
-- Решение про `SelectCompact` (остаётся отдельным компонентом) пока без спеки: он сделан до процесса со спеками.
+- Спека и сверка `SelectCompact` с макетом (`8768-6926`), узкий выпадающий список `SelectCompact` (ширина по триггеру).

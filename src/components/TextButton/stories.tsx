@@ -8,7 +8,7 @@ import { textButtonModes, textButtonSizes, textButtonVariants } from "./constant
 import { TextButton } from "./TextButton";
 
 const meta: Meta<typeof TextButton> = {
-  title: "Components/TextButton",
+  title: "Components/Buttons/TextButton",
   component: TextButton,
   parameters: {
     design: {

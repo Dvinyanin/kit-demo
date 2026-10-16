@@ -36,6 +36,7 @@ Always use `vp check` for type checking, linting, and formatting — never `pnpm
 
 - **Base UI** (`@base-ui/react`) — headless primitives for behaviour and a11y. No styles. Docs: https://base-ui.com
 - **shadcn** — not a dependency. May be used as a code reference only.
+- **Helpers** — `@true-engineering/true-react-platform-helpers` is a runtime dependency. Use it instead of ad-hoc checks: `isReactNodeNotEmpty(node)` before rendering any `ReactNode` slot, `applyAction(valueOrFn, ...args)` for props that are either a value or a function (e.g. Base UI `className`).
 - **Styling** — CSS Modules for component styles, CSS Custom Properties for tokens.
 - **Storybook** — stories live next to the component (`Select.stories.tsx`). Not included in the built package.
 
@@ -54,7 +55,7 @@ Token naming follows Figma variable paths with slashes replaced by dashes. Examp
 ## Styling Rules
 
 - **Never use raw colors** (`#fff`, `rgb(...)`, `rgba(...)`). Always use CSS custom properties from `tokens.css`.
-- **Never use raw font sizes, weights, or line-heights**. Always use typography classes via `composes: <class> from global` in CSS Modules, or apply the class directly in HTML.
+- **Never use raw font sizes, weights, or line-heights**. Always use typography classes via `composes: <class> from global` in CSS Modules, or apply the class directly in HTML. `composes` works only on a top-level class; inside a nested selector use `font: var(--body-small)` with `letter-spacing: var(--body-small-letter-spacing)` (the typography custom properties).
 - **Never use raw `box-shadow` values**. Always use shadow tokens from `tokens.css`: `--shadow-0`, `--shadow-50`, `--shadow-100`, `--shadow-300`, `--shadow-500`, `--shadow-on-white-100/300/500`, `--shadow-popover-500`.
 
 ## Figma → Storybook workflow
@@ -65,8 +66,8 @@ Full process: [docs/figma-workflow.md](docs/figma-workflow.md). Read it before s
 - **Two Figma files, different jobs.** Components (`BWW9…`) = library: variants (`State=…`), component props, token bindings. Showcase (`GmAU…`) = documentation: which states/content combinations exist, behaviour text, and `Guides` (paddings, gaps, animation). A Select is assembled from several pages (Field/trigger, Dropdown popup, Specificaton, Guides) — see §1 of the workflow doc.
 - **Never infer tokens from screenshots.** Take them from `get_design_context` per state cell or per library variant. Icons come as SVG with hex — map back to a token including `fill-opacity` (e.g. `#95A0B3` @ 0.5 = `--texticon-disabled-alt`); mark ambiguous mappings with `?`.
 - **Work at section level** (`_Section`). Whole spec pages are too large for `get_design_context`; use `get_metadata` on them only as a table of contents.
-- **Verify by token names, not by eye:** Figma returns colors as `var(--token, …)` — the same names as in our CSS, so compare names per state × element against the component's `.module.css`. Geometry is checked by measuring in Storybook (Figma measures paddings from the outer edge, CSS padding from inside the 1px border — subtract it).
-- **State stories mirror the Showcase grid 1:1** and contain only static states (Default, Error, Disabled, Read Only). Focus/Open/Hover are verified by clicking via Playwright, not shown in the grid.
+- **Verify by token names, not by eye:** Figma returns colors as `var(--token, …)` — the same names as in our CSS, so compare names per state × element against the component's `.module.css`. Geometry is checked on screenshots, not by measuring pixels by hand: compare the Storybook screenshot of a matrix story with the Figma screenshot of the same section (this catches layout bugs that token names cannot, e.g. a value pinned to the top instead of centred). Note: Figma measures paddings from the outer edge, CSS padding from inside the 1px border — subtract it.
+- **State stories mirror the Showcase grid 1:1** and contain only static states (Default, Error, Disabled, Read Only). Focus/Open/Hover are not shown in the grid; open popups are covered by screenshot tests that click the trigger.
 - **Dark theme:** semantic tokens must not differ between Figma and our themes. If they do, report it as a Figma issue for the designer — don't adapt the code.
 - **Temporary artifacts** (screenshots, Figma dumps, scratch scripts) go to `.tmp/` (gitignored), never into `docs/`. `docs/` holds only what gets committed: the workflow doc and component specs.
 
@@ -76,3 +77,5 @@ Full process: [docs/figma-workflow.md](docs/figma-workflow.md). Read it before s
 - One screenshot per matrix story (`AllVariants` with a `variant` arg: modes × sizes × default/disabled/icons). Baselines are in `__screenshots__/` next to the test and are platform-specific (`*-chromium-win32.png`); the project is local-only, no CI.
 - A missing baseline is created on the first run (the test reports it as a failure by design). Review the new PNG, then re-run. After an intended visual change delete the stale PNG (or run `vp test run -u`) and review the diff.
 - Static states only in the matrices: Hover/Focus are not covered. Select/MultiSelect popups are covered by tests that click the trigger and screenshot the whole page (the popup renders in a portal).
+- Behaviour that screenshots cannot show (Read Only never opens the popup, clearing calls `onChange(undefined)`) is covered by ordinary assertions in the same `*.test.tsx`.
+- Themes and the `white` background are set per test through `composeStories(stories, { initialGlobals: { isDarkTheme, withBackground } })`.

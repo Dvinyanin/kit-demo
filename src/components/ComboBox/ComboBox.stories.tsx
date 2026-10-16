@@ -14,7 +14,7 @@ const ITEMS = [
 ];
 
 const meta: Meta<typeof ComboBox> = {
-  title: "Components/ComboBox",
+  title: "Components/Δ Not ready/ComboBox",
   component: ComboBox,
   parameters: {
     design: {

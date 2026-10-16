@@ -1,0 +1,133 @@
+/* ─── Root ─────────────────────────────────────────────────────────────────── */
+
+/*
+ * Состояния корня плоские: каждое задаёт только переменные коробки и цвет лейбла.
+ * Коробка (.box) читает переменные, поэтому перебивает друг друга только порядок объявления.
+ */
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  color: var(--texticon);
+
+  /* Без лейбла высота равна строке окружающего текста (1lh), и чекбокс встаёт в типографию */
+  vertical-align: top;
+  cursor: pointer;
+
+  --checkbox-bg: var(--bg-surface);
+  --checkbox-border: var(--border-silver);
+  --checkbox-checked-bg: var(--bg-accent);
+  --checkbox-mark: var(--texticon-white);
+
+  /* Без лейбла высота равна строке окружающего текста: корень берёт line-height у родителя (1lh), и чекбокс встаёт в типографику */
+  &:not(:has(.label)) {
+    line-height: inherit;
+  }
+}
+
+.checkbox:hover {
+  --checkbox-border: var(--border-accent);
+  --checkbox-checked-bg: var(--bg-accent-hover);
+}
+
+.checkbox:active {
+  --checkbox-bg: var(--bg-accent-muted);
+  --checkbox-border: var(--border-accent-active);
+  --checkbox-checked-bg: var(--bg-accent-active);
+}
+
+.invalid {
+  --checkbox-border: var(--border-danger);
+  --checkbox-checked-bg: var(--bg-danger);
+}
+
+.invalid:hover {
+  --checkbox-border: var(--border-danger-active);
+  --checkbox-checked-bg: var(--bg-danger-hover);
+}
+
+.invalid:active {
+  --checkbox-bg: var(--bg-danger-muted);
+  --checkbox-border: var(--border-danger-active);
+  --checkbox-checked-bg: var(--bg-danger-active);
+}
+
+/* Read Only не реагирует на мышь, поэтому Hover и Active не срабатывают */
+.readOnly {
+  pointer-events: none;
+}
+
+/* Disabled объявлен последним и перечисляет :hover и :active, чтобы перебить остальные состояния */
+.disabled,
+.disabled:hover,
+.disabled:active {
+  color: var(--texticon-disabled);
+  cursor: not-allowed;
+
+  --checkbox-bg: var(--bg-surface-disabled);
+  --checkbox-border: var(--border-silver-disabled);
+  --checkbox-checked-bg: var(--bg-semisilver);
+  --checkbox-mark: var(--texticon-disabled);
+}
+
+/* Лейбл слева: порядок в разметке прежний (коробка первой), меняется только раскладка */
+.left {
+  flex-direction: row-reverse;
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────────── */
+
+.medium {
+  composes: body-large from global;
+  gap: 12px;
+
+  --checkbox-size: 18px;
+}
+
+.small {
+  composes: body-small from global;
+  gap: 8px;
+
+  --checkbox-size: 16px;
+}
+
+/* ─── Box ──────────────────────────────────────────────────────────────────── */
+
+.box {
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  margin-block: calc((1lh - var(--checkbox-size)) / 2);
+  padding: 0;
+  border: 1px solid var(--checkbox-border);
+  border-radius: 4px;
+  background-color: var(--checkbox-bg);
+  color: var(--checkbox-mark);
+  outline: none;
+
+  /* Выбран и частично: заливка без видимой рамки */
+  &[data-checked],
+  &[data-indeterminate] {
+    border-color: transparent;
+    background-color: var(--checkbox-checked-bg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--effects-focus-ring);
+    outline-offset: 1px;
+  }
+}
+
+/* Метка рисуется поверх всей коробки (она 18×18 или 16×16, без учёта рамки в 1px) */
+.indicator {
+  position: absolute;
+  inset: -1px;
+  display: flex;
+}
+
+/* ─── Label ────────────────────────────────────────────────────────────────── */
+
+.label {
+  min-width: 0;
+}

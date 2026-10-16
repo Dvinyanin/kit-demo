@@ -1,5 +1,3 @@
-export { SelectBase } from "./SelectBase";
-export type { SelectBaseProps } from "./SelectBase";
-
-export { MultiSelectBase } from "./MultiSelectBase";
-export type { MultiSelectBaseProps } from "./MultiSelectBase";
+export type { SelectCommonProps } from "./SelectTrigger";
+export { SelectIcon } from "./SelectIcon";
+export type { SelectIconProps } from "./SelectIcon";

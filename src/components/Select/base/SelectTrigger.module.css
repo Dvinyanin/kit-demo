@@ -1,0 +1,267 @@
+/* ─── Wrapper ──────────────────────────────────────────────────────────────── */
+
+/* Ширина задаётся только родителем: поле растягивается на всю его ширину */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+/* ─── Trigger ──────────────────────────────────────────────────────────────── */
+
+.trigger {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-surface);
+  color: var(--texticon);
+  cursor: default;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+
+  --select-label-color: var(--texticon-secondary);
+
+  &[data-popup-open] {
+    border-color: var(--border-accent);
+
+    --select-label-color: var(--texticon-accent);
+  }
+
+  &[data-disabled] {
+    color: var(--texticon-disabled);
+    border-color: var(--border-alt);
+    background-color: var(--bg-surface-disabled);
+    cursor: not-allowed;
+
+    --select-label-color: var(--texticon-disabled);
+  }
+}
+
+/* ─── Size variants ─────────────────────────────────────────────────────────── */
+
+/* Отступы в макете отсчитываются от внешнего края, обводка в раскладку не входит, поэтому в padding вычтен 1px обводки */
+
+.default {
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 11px;
+
+  --select-label-float-offset: 3px;
+  --select-required-size: 5px;
+  --select-body-font: var(--body-large-spacious);
+  --select-body-letter-spacing: var(--body-large-spacious-letter-spacing);
+  --select-label-small-font: var(--body-small);
+  --select-label-small-letter-spacing: var(--body-small-letter-spacing);
+  --select-suffix-font: var(--body-large-strong);
+  --select-suffix-letter-spacing: var(--body-large-strong-letter-spacing);
+
+  & + .captionText,
+  & + .errorText {
+    padding-left: 12px;
+  }
+}
+
+.micro {
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 9px;
+
+  --select-label-float-offset: 2px;
+  --select-required-size: 4px;
+  --select-body-font: var(--reduced-body-medium);
+  --select-body-letter-spacing: var(--reduced-body-medium-letter-spacing);
+  --select-label-small-font: var(--reduced-body-small);
+  --select-label-small-letter-spacing: var(--reduced-body-small-letter-spacing);
+  --select-suffix-font: var(--reduced-body-medium-strong);
+  --select-suffix-letter-spacing: var(--reduced-body-medium-strong-letter-spacing);
+
+  & + .captionText,
+  & + .errorText {
+    padding-left: 10px;
+  }
+}
+
+/* ─── Error / ReadOnly ───────────────────────────────────────────────────────── */
+
+.triggerError {
+  border-color: var(--border-danger);
+
+  --select-label-color: var(--texticon-danger);
+
+  &[data-popup-open] {
+    border-color: var(--border-danger);
+
+    --select-label-color: var(--texticon-danger);
+  }
+}
+
+.triggerReadOnly {
+  border-color: var(--border-alt);
+  background-color: var(--bg-surface-disabled);
+  cursor: default;
+}
+
+/* ─── Input wrapper (stacked label + value, clear button) ──────────────────── */
+
+.inputWrapper {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* ─── Trigger content (stacked label + value) ──────────────────────────────── */
+
+.triggerContent {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+  gap: 0;
+  text-align: left;
+
+  /* Когда лейбл всплыл, стек прижимается к верху. Без лейбла значение или плейсхолдер стоит по центру */
+  &:has(.innerLabel):has(.value:not(:empty)),
+  .trigger[data-popup-open] &:has(.innerLabel) {
+    justify-content: flex-start;
+    padding-top: var(--select-label-float-offset);
+  }
+}
+
+/* ─── Inner label ───────────────────────────────────────────────────────────── */
+
+.innerLabel {
+  font: var(--select-body-font);
+  letter-spacing: var(--select-body-letter-spacing);
+  color: var(--select-label-color);
+  user-select: none;
+  pointer-events: none; /* чтобы клик проваливался на кнопку-триггер и срабатывал onPointerDown */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+
+  /* Float to small when a value/placeholder is shown or dropdown is open */
+  .triggerContent:has(.value:not(:empty)) &,
+  .trigger[data-popup-open] .triggerContent & {
+    font: var(--select-label-small-font);
+    letter-spacing: var(--select-label-small-letter-spacing);
+  }
+}
+
+/* Признак обязательности (Base UI ставит aria-required): оранжевая точка после лейбла, а без лейбла после плейсхолдера */
+.trigger[aria-required="true"] {
+  .innerLabel::after,
+  .triggerContent:not(:has(.innerLabel)) .value[data-placeholder]::after {
+    content: "";
+    display: inline-block;
+    width: var(--select-required-size);
+    height: var(--select-required-size);
+    margin: 2px 0 0 4px;
+    border-radius: 4px;
+    background-color: var(--texticon-warning);
+    vertical-align: top;
+  }
+
+  /* В макете у Micro точка после плейсхолдера 5px, после лейбла 4px */
+  .triggerContent:not(:has(.innerLabel)) .value[data-placeholder]::after {
+    --select-required-size: 5px;
+  }
+}
+
+/* ─── Value ────────────────────────────────────────────────────────────────── */
+
+.value {
+  font: var(--select-body-font);
+  letter-spacing: var(--select-body-letter-spacing);
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+
+  &[data-placeholder] {
+    color: var(--texticon-tertiary);
+  }
+}
+
+/* ─── Icons ─────────────────────────────────────────────────────────────────── */
+
+/* Слот иконки слева, справа и кнопки очистки */
+.iconSlot {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  color: var(--texticon-tertiary);
+
+  --icon-size: 20px;
+}
+
+/* Очистка видна только при выбранном значении и в активном поле */
+.clear {
+  .inputWrapper:has(.value[data-placeholder]) &,
+  .trigger[data-disabled] &,
+  .triggerReadOnly & {
+    display: none;
+  }
+}
+
+.suffix {
+  flex-shrink: 0;
+  align-self: center;
+  padding-left: 4px;
+  font: var(--select-suffix-font);
+  letter-spacing: var(--select-suffix-letter-spacing);
+  color: var(--texticon-secondary);
+
+  .trigger[data-disabled] & {
+    color: var(--texticon-disabled-alt);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  color: var(--texticon-tertiary);
+
+  --icon-size: 20px;
+
+  transition: rotate 150ms ease;
+
+  .trigger[data-popup-open] & {
+    rotate: 180deg;
+    color: var(--texticon-active);
+  }
+
+  .trigger[data-disabled] &,
+  .triggerReadOnly & {
+    color: var(--texticon-disabled-alt);
+  }
+}
+
+/* ─── Caption / Error ──────────────────────────────────────────────────────── */
+
+.captionText {
+  composes: body-small from global;
+  color: var(--texticon-secondary);
+  margin: 0;
+}
+
+.errorText {
+  composes: body-small from global;
+  color: var(--texticon-danger);
+  margin: 0;
+}

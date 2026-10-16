@@ -1,56 +1,62 @@
-import { Select as BaseSelect } from "@base-ui/react/select";
-import clsx from "clsx";
+import type { OptionProps } from "../base/options";
+import { SelectCore } from "../base/SelectCore";
+import { OptionContent, SelectItem } from "../base/SelectItem";
+import { SelectPopup } from "../base/SelectPopup";
+import { SelectCompactTrigger } from "./SelectCompactTrigger";
+import type { SelectCompactTriggerProps } from "./SelectCompactTrigger";
 
-import { Icon } from "../../Icon";
-import {
-  Group,
-  Item,
-  MultiSelectItem,
-  NestedGroup,
-  SelectPopup,
-  Separator,
-} from "../base/SelectShared";
-
-import styles from "./SelectCompact.module.css";
-
-// ─── Root ─────────────────────────────────────────────────────────────────────
-
-export interface SelectCompactProps<
-  Value extends string,
-  Multiple extends boolean = false,
-> extends BaseSelect.Root.Props<Value, Multiple> {
-  placeholder?: string;
-  fontStyle?: "default" | "bold";
+interface SelectCompactProps<Item>
+  extends OptionProps<Item>, Pick<SelectCompactTriggerProps, "placeholder" | "fontStyle"> {
+  /** Выбранный элемент (сам элемент из `options`). `undefined` значит «ничего не выбрано». */
+  value?: Item;
+  onChange?: (value: NoInfer<Item> | undefined) => void;
+  options: Item[];
+  disabled?: boolean;
 }
 
-function SelectCompactRoot<Value extends string, Multiple extends boolean = false>({
-  children,
+function SelectCompactRoot<Item>({
+  value,
+  onChange,
+  options,
+  getOptionId = String,
+  getValueView = getOptionId,
+  getOptionView = getValueView,
+  isOptionDisabled,
+  disabled,
   placeholder,
-  fontStyle = "default",
-  ...rootProps
-}: SelectCompactProps<Value, Multiple>) {
-  const triggerClass = clsx(styles.trigger, { [styles.triggerBold]: fontStyle === "bold" });
-
+  fontStyle,
+}: SelectCompactProps<Item>) {
   return (
-    <BaseSelect.Root {...rootProps}>
-      <BaseSelect.Trigger className={triggerClass}>
-        <BaseSelect.Value placeholder={placeholder} className={styles.value} />
-        <BaseSelect.Icon className={styles.icon}>
-          <Icon type="chevron-small" />
-        </BaseSelect.Icon>
-      </BaseSelect.Trigger>
-
-      <SelectPopup>{children}</SelectPopup>
-    </BaseSelect.Root>
+    <SelectCore<Item>
+      value={value}
+      onChange={onChange}
+      isItemEqualToValue={(a, b) => getOptionId(a) === getOptionId(b)}
+      disabled={disabled}
+      renderTrigger={() => (
+        <SelectCompactTrigger<Item>
+          placeholder={placeholder}
+          fontStyle={fontStyle}
+          getValueView={getValueView}
+        />
+      )}
+    >
+      <SelectPopup>
+        {options.map((option) => (
+          <SelectItem
+            key={getOptionId(option)}
+            value={option}
+            disabled={isOptionDisabled?.(option)}
+          >
+            {getOptionView(option)}
+          </SelectItem>
+        ))}
+      </SelectPopup>
+    </SelectCore>
   );
 }
 
-// ─── Export ───────────────────────────────────────────────────────────────────
+export const SelectCompact = Object.assign(SelectCompactRoot, { OptionContent });
 
-export const SelectCompact = Object.assign(SelectCompactRoot, {
-  Item,
-  MultiSelectItem,
-  Group,
-  NestedGroup,
-  Separator,
-});
+export declare namespace SelectCompact {
+  type Props<Item> = SelectCompactProps<Item>;
+}

@@ -1,0 +1,26 @@
+/* Иконка-кнопка в слоте поля: цвет по состояниям нажатия */
+.button {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--texticon-tertiary);
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    color: var(--texticon-secondary);
+  }
+
+  &:active {
+    color: var(--texticon-active);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--effects-focus-ring);
+    outline-offset: 1px;
+  }
+}

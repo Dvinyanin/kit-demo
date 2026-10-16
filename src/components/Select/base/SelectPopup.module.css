@@ -1,0 +1,89 @@
+/* ─── Positioner & Popup ───────────────────────────────────────────────────── */
+
+.positioner {
+  outline: none;
+  z-index: 10;
+  user-select: none;
+}
+
+.popup {
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 10px;
+  background-color: var(--bg-surface-level2);
+  background-clip: padding-box;
+  color: var(--texticon);
+  padding: 6px;
+  width: var(--anchor-width);
+  transform-origin: var(--transform-origin);
+  box-shadow: var(--shadow-popover-500);
+  transition:
+    transform 100ms ease-out,
+    opacity 100ms ease-out;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  &[data-side="none"] {
+    transition: none;
+    transform: translateY(1px);
+    opacity: 1;
+  }
+}
+
+/* ─── Size variants ────────────────────────────────────────────────────────── */
+
+.default {
+  --select-cell-padding: 10px;
+  --select-cell-gap: 12px;
+  --select-cell-icon-size: 20px;
+  --select-suffix-offset: 0;
+  --select-cell-font: var(--body-medium-spacious);
+  --select-cell-letter-spacing: var(--body-medium-spacious-letter-spacing);
+  --select-subtext-font: var(--body-small);
+  --select-subtext-letter-spacing: var(--body-small-letter-spacing);
+}
+
+.micro {
+  --select-cell-padding: 5px 8px 5px 6px;
+  --select-cell-gap: 8px;
+  --select-cell-icon-size: 16px;
+
+  /* в макете суффикс отстоит от значения на 12px при gap ячейки 8px */
+  --select-suffix-offset: 4px;
+  --select-cell-font: var(--body-small);
+  --select-cell-letter-spacing: var(--body-small-letter-spacing);
+  --select-subtext-font: var(--body-x-small);
+  --select-subtext-letter-spacing: var(--body-x-small-letter-spacing);
+}
+
+/* ─── List ─────────────────────────────────────────────────────────────────── */
+
+.list {
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto;
+  max-height: var(--available-height);
+
+  /* Полоса прокрутки из макета: 6px, радиус 3, --texticon-quaternary */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: var(--texticon-quaternary);
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--texticon-quaternary) transparent;
+  }
+}

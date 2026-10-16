@@ -2,7 +2,7 @@
 
 Охват: выпадающий список для выбора одного значения (`Dropdown [Simple]` и `Dropdown Micro [Simple]`) и его ячейки: Value, Value + Subtext, Value + Suffix, Code + Value, Icon + Value, No Items. Статус-ячейки, группы, вложенность, поиск и ComboBox описываются отдельными спеками. Мультивыбор (ячейка с чекбоксом) описан в [select-multiple.md](select-multiple.md).
 
-В коде это `SelectPopup` и `Item` в `src/components/Select/base/SelectShared.tsx` (общие для Select, MultiSelect и SelectCompact). Micro-часть описана как отличия от Default.
+В коде это `SelectPopup` (`base/SelectPopup.tsx`) и `SelectItem` с `OptionContent` (`base/SelectItem.tsx`), общие для Select, MultiSelect (там своя ячейка `MultiSelectItem` с чекбоксом) и SelectCompact. Micro-часть описана как отличия от Default.
 
 Статус: от 2026-10-15; сверка выполнена, расхождения исправлены (§8). Нерешённое (наведение, скролл, пустой список, высота списка) в §7.
 
@@ -26,10 +26,10 @@
 | ------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | `Dropdown [Simple]`             | `SelectPopup` + `Item`                           | Размер попапа должен следовать размеру триггера: `Select size="micro"` даёт `Dropdown Micro`.                                    |
 | Value Cell                      | `Item` (`children`)                              |                                                                                                                                  |
-| Subtext                         | `subtext`                                        |                                                                                                                                  |
-| Txt (суффикс)                   | `suffix`                                         |                                                                                                                                  |
-| Code (`00000`)                  | `code`                                           |                                                                                                                                  |
-| Icon                            | `iconLeft`                                       |                                                                                                                                  |
+| Subtext                         | `<OptionContent subtext>`                        |                                                                                                                                  |
+| Txt (суффикс)                   | `<OptionContent suffix>`                         |                                                                                                                                  |
+| Code (`00000`)                  | `<OptionContent prefix="00000">`                 |                                                                                                                                  |
+| Icon                            | `<OptionContent prefix={<Select.Icon … />}>`     |                                                                                                                                  |
 | Выбранное (иконка `icon-check`) | `BaseSelect.ItemIndicator` с `Icon type="check"` | Путь иконки в Figma совпал с `src/icons/check.svg`.                                                                              |
 | Status-ячейка                   | `Item` с любым содержимым в `children`           | Содержимое произвольное (StatusTag и т. п.); отступы ячейки задаются `--select-cell-padding` через `style` или `className` (§7). |
 | Пустой список (`No Items`)      | не реализован                                    |                                                                                                                                  |
@@ -142,7 +142,7 @@
 
 ## 9. Замеры в Storybook после правок
 
-Открытый попап, истории `Simple (Single)` и `Micro`:
+Открытый попап, истории `Components/Selects/Select/Cells`:
 
 | Величина                                   | Ожидалось (§6)              | Получено                        |
 | ------------------------------------------ | --------------------------- | ------------------------------- |

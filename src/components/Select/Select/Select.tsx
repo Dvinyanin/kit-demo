@@ -1,68 +1,69 @@
-import type { ReactNode } from "react";
+import type { OptionProps } from "../base/options";
+import { SelectCore } from "../base/SelectCore";
+import { SelectIcon } from "../base/SelectIcon";
+import { OptionContent, SelectItem } from "../base/SelectItem";
+import { SelectPopup } from "../base/SelectPopup";
+import type { SelectCommonProps } from "../base/SelectTrigger";
+import { SelectTrigger } from "../base/SelectTrigger";
 
-import type { IIcon } from "../../Icon";
-import { SelectBase } from "../base/SelectBase";
-import type { SelectBaseProps } from "../base/SelectBase";
-
-export interface SelectOption<Value extends string = string> {
-  value: Value;
-  label: string;
-  subtext?: string;
-  suffix?: string;
-  code?: string;
-  icon?: IIcon;
-  disabled?: boolean;
+interface SelectProps<Item> extends SelectCommonProps, OptionProps<Item> {
+  /** Выбранный элемент (сам элемент из `options`). `undefined` значит «ничего не выбрано». */
+  value?: Item;
+  /** Вызывается с выбранным элементом, при очистке с `undefined`. */
+  onChange?: (value: NoInfer<Item> | undefined) => void;
+  options: Item[];
 }
 
-export interface SelectProps<Value extends string> extends Omit<
-  SelectBaseProps<Value>,
-  "children" | "value" | "onValueChange" | "renderValue" | "items"
-> {
-  /** Selected value. `undefined` means nothing is selected. */
-  value?: Value;
-  /** Called with the new value, or `undefined` when the selection is cleared. */
-  onChange?: (value: Value | undefined) => void;
-  options: SelectOption<Value>[];
-  /** Custom content of an option in the list (e.g. a status tag). */
-  renderOption?: (option: SelectOption<Value>) => ReactNode;
-  /** What the trigger shows. Receives the selected option (`undefined` if it is not in `options`). */
-  renderValue?: (option: SelectOption<Value> | undefined) => ReactNode;
-}
-
-function SelectRoot<Value extends string>({
+function SelectRoot<Item>({
   value,
   onChange,
   options,
-  renderOption,
-  renderValue,
-  ...fieldProps
-}: SelectProps<Value>) {
+  getOptionId = String,
+  getValueView = getOptionId,
+  getOptionView = getValueView,
+  isOptionDisabled,
+  disabled,
+  required,
+  readOnly,
+  ...triggerProps
+}: SelectProps<Item>) {
   return (
-    <SelectBase
-      {...fieldProps}
+    <SelectCore<Item>
       value={value}
-      onValueChange={(next) => onChange?.(next ?? undefined)}
-      renderValue={(current) => {
-        if (current == null) return null;
-        const option = options.find((item) => item.value === current);
-        return renderValue ? renderValue(option) : (option?.label ?? current);
-      }}
+      onChange={onChange}
+      isItemEqualToValue={(a, b) => getOptionId(a) === getOptionId(b)}
+      disabled={disabled}
+      required={required}
+      readOnly={readOnly}
+      renderTrigger={({ clear }) => (
+        <SelectTrigger
+          {...triggerProps}
+          readOnly={readOnly}
+          getValueView={getValueView}
+          onClear={clear}
+        />
+      )}
     >
-      {options.map((option) => (
-        <SelectBase.Item
-          key={option.value}
-          value={option.value}
-          disabled={option.disabled}
-          iconLeft={option.icon}
-          subtext={option.subtext}
-          suffix={option.suffix}
-          code={option.code}
-        >
-          {renderOption ? renderOption(option) : option.label}
-        </SelectBase.Item>
-      ))}
-    </SelectBase>
+      <SelectPopup size={triggerProps.size}>
+        {options.map((option) => (
+          <SelectItem
+            key={getOptionId(option)}
+            value={option}
+            disabled={isOptionDisabled?.(option)}
+          >
+            {getOptionView(option)}
+          </SelectItem>
+        ))}
+      </SelectPopup>
+    </SelectCore>
   );
 }
 
-export const Select = Object.assign(SelectRoot, { Base: SelectBase });
+export const Select = Object.assign(SelectRoot, {
+  Icon: SelectIcon,
+  OptionContent,
+});
+
+export declare namespace Select {
+  type Props<Item> = SelectProps<Item>;
+}
